@@ -1,0 +1,821 @@
+<title>UHE 2026</title>
+<style>
+  :root{
+    --ink:#26313a;
+    --body-c:#5b6a70;
+    --accent:#0a93b0;
+    --accent-bright:#1dd3f0;
+    --leaf:#178f6c;
+    --leaf-bright:#2fcf9e;
+    --violet:#8a4f93;
+    --violet-bright:#a468ab;
+    --surface:#ffffff;
+    --surface-alt:#f5f6f7;
+    --surface-card:#ffffff;
+    --border:#e2e6e7;
+    --shadow:0 16px 40px -22px rgba(30,60,70,.20);
+    --glass-bg:linear-gradient(135deg, rgba(10,147,176,.14), rgba(23,143,108,.10));
+    --glass-border:rgba(10,147,176,.32);
+    --glass-shine:rgba(255,255,255,.9);
+    --radius:16px;
+    --maxw:1160px;
+  }
+  /* UHE 2026 se presenta siempre en su versión clara — fondo blanco con
+     acentos de color — sin variante oscura, para que el contraste del
+     texto nunca dependa del modo del sistema del visitante. */
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--surface); color:var(--body-c); font-family:"Open Sans", ui-sans-serif, system-ui, sans-serif; font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:"Roboto Slab", Georgia, serif; color:var(--ink); line-height:1.2; margin:0 0 .5em; text-wrap:balance;}
+  h1{font-size:clamp(2rem,4.2vw,3.2rem); font-weight:700;}
+  h2{font-size:clamp(1.5rem,2.8vw,2.2rem); font-weight:700;}
+  h3{font-size:1.15rem; font-weight:700;}
+  p{margin:0 0 1em;}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  ul{margin:0; padding:0; list-style:none;}
+  button{font:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  .page{display:none;}
+  .page.active{display:block;}
+  section{padding:80px 0;}
+  .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:14px;}
+  .eyebrow::before{content:""; width:22px; height:2px; background:var(--accent); display:inline-block; border-radius:2px;}
+  .lede{font-size:1.08rem; max-width:640px;}
+  .section-head{max-width:720px; margin-bottom:44px;}
+  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;}
+  .alt{background:var(--surface-alt);}
+
+  /* ---------- NAV ---------- */
+  .nav{position:sticky; top:0; z-index:50; backdrop-filter:blur(14px) saturate(140%); background:color-mix(in srgb, var(--surface) 82%, transparent); border-bottom:1px solid var(--border);}
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:12px; padding-bottom:12px; gap:20px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:"Roboto Slab",serif; font-weight:700; color:var(--ink); font-size:1.02rem;}
+  .brand img{width:34px; height:44px; flex:none; object-fit:contain;}
+  .brand small{display:block; font-family:"Open Sans",sans-serif; font-weight:600; font-size:.66rem; letter-spacing:.08em; color:var(--body-c); text-transform:uppercase;}
+  .nav-links{display:flex; align-items:center; gap:6px;}
+  .nav-links > li{position:relative;}
+  .nav-links a, .nav-parent{display:flex; align-items:center; gap:5px; padding:10px 14px; font-size:.9rem; font-weight:600; color:var(--body-c); border:none; background:none; cursor:pointer; border-radius:999px; transition:color .2s, background .2s;}
+  .nav-links a:hover, .nav-parent:hover{color:var(--accent);}
+  .nav-links a.active{color:var(--accent); background:color-mix(in srgb, var(--accent) 10%, transparent);}
+  .nav-parent svg{width:13px; height:13px; transition:transform .2s;}
+  li.has-sub.open .nav-parent{color:var(--accent);}
+  li.has-sub.open .nav-parent svg{transform:rotate(180deg);}
+  li.has-sub.has-active .nav-parent{color:var(--accent);}
+  .submenu{position:absolute; top:calc(100% + 6px); left:0; min-width:230px; background:var(--surface-card); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow); padding:8px; display:none; flex-direction:column; gap:2px;}
+  li.has-sub.open .submenu{display:flex;}
+  .submenu a{padding:11px 13px; border-radius:9px; font-size:.88rem; color:var(--ink); font-weight:600; display:block;}
+  .submenu a:hover{background:var(--surface-alt); color:var(--accent);}
+  .submenu a.active{color:var(--accent);}
+  .nav-cta{padding:10px 22px !important; border-radius:999px; font-weight:700; background:var(--glass-bg); border:1px solid var(--glass-border); box-shadow: inset 0 1px 0 var(--glass-shine); color:var(--ink) !important;}
+  .menu-btn{display:none; background:none; border:none; cursor:pointer; padding:6px; color:var(--ink);}
+  .menu-btn svg{width:24px; height:24px;}
+  @media (max-width:900px){
+    .nav-links{display:none;}
+    .menu-btn{display:block;}
+  }
+
+  /* ---------- MOBILE DRAWER (fixed light palette, matches reference) ---------- */
+  .drawer-overlay{position:fixed; inset:0; background:rgba(10,20,25,.45); opacity:0; pointer-events:none; transition:opacity .3s; z-index:90;}
+  .drawer-overlay.open{opacity:1; pointer-events:auto;}
+  .mobile-drawer{position:fixed; top:0; right:0; bottom:0; width:min(88vw,340px); background:#ffffff; box-shadow:-18px 0 40px -12px rgba(20,40,50,.28); transform:translateX(100%); transition:transform .32s ease; z-index:95; padding:26px 22px; overflow-y:auto;}
+  .mobile-drawer.open{transform:translateX(0);}
+  .drawer-head{display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:22px;}
+  .drawer-title{font-family:"Roboto Slab",serif; font-weight:700; font-size:1.5rem; color:#26313a; display:inline-block; padding-bottom:10px; border-bottom:3px solid var(--violet-bright,#a468ab); width:fit-content;}
+  .drawer-close{background:none; border:none; cursor:pointer; color:#5b6a70; padding:4px;}
+  .drawer-close svg{width:22px; height:22px;}
+  .drawer-link, .drawer-parent{display:flex; align-items:center; justify-content:space-between; width:100%; background:none; border:none; text-align:left; padding:16px 2px; border-bottom:1px solid #e7eaea; text-transform:uppercase; letter-spacing:.05em; font-size:.83rem; font-weight:700; color:#5b6a70; cursor:pointer;}
+  .drawer-link.active{color:#0a93b0;}
+  .drawer-parent svg{width:15px; height:15px; transition:transform .25s; color:#9aa3a6; flex:none;}
+  .drawer-group.open .drawer-parent{color:#0a93b0;}
+  .drawer-group.open .drawer-parent svg{transform:rotate(180deg); color:#0a93b0;}
+  .drawer-sub{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .drawer-group.open .drawer-sub{max-height:240px;}
+  .drawer-sub a{display:block; padding:12px 10px 12px 18px; font-size:.8rem; font-weight:600; color:#5b6a70; text-transform:none; letter-spacing:0; border-bottom:1px solid #f0f2f2;}
+  .drawer-sub a:hover, .drawer-sub a.active{color:#0a93b0;}
+
+  /* ---------- CRYSTAL BUTTONS ---------- */
+  .crystal-btn{position:relative; display:inline-flex; align-items:center; gap:10px; padding:14px 26px; border-radius:999px; font-weight:700; font-size:.96rem; color:var(--ink); border:1px solid var(--glass-border); background:var(--glass-bg); box-shadow: inset 0 1px 0 var(--glass-shine), var(--shadow); backdrop-filter:blur(10px) saturate(160%); cursor:pointer; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease;}
+  .crystal-btn::after{content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(120deg, transparent 20%, rgba(255,255,255,.7) 34%, transparent 48%); transform:translateX(-120%); transition:transform .7s ease;}
+  .crystal-btn:hover{transform:translateY(-3px); box-shadow: inset 0 1px 0 var(--glass-shine), 0 22px 40px -18px rgba(10,147,176,.35);}
+  .crystal-btn:hover::after{transform:translateX(120%);}
+  .crystal-btn.solid{background:linear-gradient(135deg, var(--accent), var(--leaf)); border-color:transparent; color:#fff;}
+  .crystal-btn.ghost{background:transparent; border-color:var(--border); box-shadow:none;}
+  .crystal-btn.ghost:hover{box-shadow:0 16px 28px -18px rgba(20,50,60,.3);}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative; overflow:hidden; background:linear-gradient(160deg,#f2fcfd 0%, #f1fbf6 60%, #ffffff 100%); padding:72px 0 0;}
+  .hero .wrap{position:relative; z-index:2; display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center; padding-bottom:64px;}
+  .hero-ctas{display:flex; flex-wrap:wrap; gap:16px; margin-top:30px;}
+  .hero-orbit{position:relative; height:340px;}
+  .hero-orbit svg{position:absolute;}
+  .float{animation:float 7s ease-in-out infinite;}
+  .float.d2{animation-delay:1.2s;} .float.d3{animation-delay:2.4s;} .float.d4{animation-delay:3.6s;}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-16px) rotate(4deg);}}
+  .pulse-ring{transform-origin:center; animation:pulseRing 3.2s ease-out infinite;}
+  @keyframes pulseRing{0%{transform:scale(.9); opacity:.6;} 70%{transform:scale(1.35); opacity:0;} 100%{transform:scale(1.35); opacity:0;}}
+  .heartline{stroke-dasharray:340; stroke-dashoffset:340; animation:draw 3.6s ease-in-out infinite;}
+  @keyframes draw{0%{stroke-dashoffset:340;} 55%{stroke-dashoffset:0;} 100%{stroke-dashoffset:-340;}}
+  .wave-divider{display:block; width:100%; height:56px;}
+  .wave-divider path{fill:var(--surface-alt);}
+  .wave-drift{animation:drift 18s linear infinite;}
+  @keyframes drift{from{transform:translateX(0);} to{transform:translateX(-200px);}}
+  .stat-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:36px;}
+  .stat-chip{display:flex; flex-direction:column; gap:2px; padding:14px 18px; min-width:126px; border-radius:14px; background:var(--surface-card); border:1px solid var(--border); box-shadow:var(--shadow);}
+  .stat-chip b{font-family:"Roboto Slab",serif; font-size:1.4rem; color:var(--accent);}
+  .stat-chip span{font-size:.72rem; letter-spacing:.04em; color:var(--body-c);}
+
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{transform:translateY(24px); transition:transform .6s cubic-bezier(.2,.7,.2,1);}
+    .reveal.in{transform:none;}
+  }
+
+  /* ---------- SUBTABS ---------- */
+  .subtabs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px;}
+  .subtab{padding:9px 18px; border-radius:999px; font-size:.85rem; font-weight:700; border:1px solid var(--border); color:var(--body-c);}
+  .subtab.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .subtab:not(.active):hover{color:var(--accent); border-color:var(--accent);}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .tl-card{background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius); padding:26px 22px; box-shadow:var(--shadow);}
+  .tl-card .icon{width:42px; height:42px; color:var(--accent); margin-bottom:14px;}
+  .tl-card .tag{display:inline-block; margin-top:10px; padding:5px 12px; border-radius:999px; font-size:.78rem; font-weight:700; background:color-mix(in srgb, var(--leaf) 14%, transparent); color:var(--leaf);}
+
+  /* ---------- GRID CARDS ---------- */
+  .grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .card{background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius); padding:24px 22px; box-shadow:var(--shadow);}
+  .card .icon{width:36px; height:36px; color:var(--leaf); margin-bottom:12px;}
+  .card h3{margin-bottom:8px;}
+  .card p{font-size:.95rem; margin-bottom:0;}
+  blockquote{margin:0; padding:26px 28px; border-radius:var(--radius); background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, transparent), color-mix(in srgb, var(--leaf) 8%, transparent)); border-left:4px solid var(--accent); font-family:"Roboto Slab",serif; font-size:1.1rem; color:var(--ink);}
+
+  /* ---------- EJES ---------- */
+  .ejes-cols{display:grid; grid-template-columns:1fr 1fr; gap:30px;}
+  .ejes-cols h4{font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); margin-bottom:14px;}
+  .chip-list{display:flex; flex-wrap:wrap; gap:9px;}
+  .chip{padding:9px 15px; border-radius:999px; font-size:.86rem; font-weight:600; background:var(--surface-alt); border:1px solid var(--border); color:var(--ink); transition:transform .2s, border-color .2s;}
+  .chip:hover{transform:translateY(-2px); border-color:var(--accent); color:var(--accent);}
+
+  /* ---------- ASISTIR ---------- */
+  .spotlight{display:grid; grid-template-columns:1fr 1fr; border-radius:20px; overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--border);}
+  .spotlight-copy{padding:40px; background:var(--surface-card);}
+  .spotlight-side{position:relative; overflow:hidden; padding:40px; background:linear-gradient(150deg, color-mix(in srgb, var(--accent) 14%, transparent), color-mix(in srgb, var(--leaf) 12%, transparent)); display:flex; flex-direction:column; justify-content:center; gap:16px;}
+  .spotlight-side .big{font-family:"Roboto Slab",serif; font-size:2.1rem; letter-spacing:.06em; color:var(--accent);}
+  .check-list li{display:flex; gap:10px; align-items:flex-start; margin-bottom:12px; font-size:.95rem;}
+  .check-list svg{width:20px; height:20px; flex:none; color:var(--leaf); margin-top:2px;}
+
+  /* ---------- INSTITUCIONES ---------- */
+  .inst-card .badge{width:54px; height:54px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-family:"Roboto Slab",serif; font-weight:700; color:#fff; margin-bottom:14px; font-size:.9rem; background:linear-gradient(135deg, var(--accent), var(--leaf));}
+  .inst-card .role{font-size:.8rem; color:var(--accent); font-weight:700; margin-bottom:6px;}
+
+  /* ---------- COMITE ---------- */
+  details.committee{background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius); padding:6px 22px; margin-bottom:14px;}
+  details.committee summary{cursor:pointer; padding:16px 0; font-family:"Roboto Slab",serif; font-weight:700; color:var(--ink); display:flex; justify-content:space-between; align-items:center; list-style:none; font-size:1.02rem;}
+  details.committee summary::-webkit-details-marker{display:none;}
+  details.committee summary .count{font-family:"Open Sans",sans-serif; font-weight:600; font-size:.78rem; color:var(--body-c);}
+  details.committee summary::after{content:"+"; font-size:1.3rem; color:var(--accent); transition:transform .25s;}
+  details.committee[open] summary::after{transform:rotate(45deg);}
+  .committee-names{display:grid; grid-template-columns:repeat(2,1fr); gap:8px 20px; padding:2px 0 20px; font-size:.9rem;}
+
+  /* ---------- PROGRAMA ---------- */
+  .programa-banner{border-radius:20px; padding:40px; text-align:center; background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, transparent), color-mix(in srgb, var(--leaf) 10%, transparent)); border:1px solid var(--border);}
+  .dias{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px;}
+  .dia{padding:18px; border-radius:14px; background:var(--surface-card); border:1px dashed var(--border);}
+  .dia b{display:block; font-family:"Roboto Slab",serif; color:var(--ink); margin-bottom:4px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--surface-alt); border-top:3px solid transparent; border-image:linear-gradient(90deg, var(--accent), var(--leaf), var(--violet)) 1; padding:56px 0 28px;}
+  .footer-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:40px;}
+  .footer-contact li{display:flex; gap:10px; margin-bottom:12px; font-size:.9rem;}
+  .footer-contact svg{width:18px; height:18px; flex:none; color:var(--accent); margin-top:2px;}
+  .footer-contact a:hover{color:var(--accent);}
+  .social-row{display:flex; gap:12px; margin-top:16px;}
+  .social-row a{width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--surface-card); border:1px solid var(--border); transition:background .2s, transform .2s, color .2s; color:var(--body-c);}
+  .social-row a:hover{background:var(--accent); color:#fff; transform:translateY(-2px);}
+  .social-row svg{width:16px; height:16px;}
+  .footer-bottom{margin-top:40px; padding-top:22px; border-top:1px solid var(--border); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:.8rem; color:var(--body-c);}
+  .footer-title{font-size:.95rem; color:var(--ink); font-family:"Roboto Slab",serif; margin-bottom:14px;}
+
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-orbit{height:200px; margin-top:8px;}
+    .timeline, .grid-4, .grid-3, .grid-2, .ejes-cols, .footer-grid, .dias{grid-template-columns:1fr;}
+    .spotlight{grid-template-columns:1fr;}
+    section{padding:56px 0;}
+    .committee-names{grid-template-columns:1fr;}
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap">
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#inicio" data-route>
+      <img src="data:image/png;base64,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" alt="Logotipo del Congreso UHE" />
+      <span>UHE 2026<small>Universidad · Salud · Ambiente</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#congreso" data-route>El congreso</a></li>
+      <li class="has-sub" data-group="autores">
+        <button class="nav-parent" data-toggle="autores">Autores <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <ul class="submenu">
+          <li><a href="#autores-instrucciones" data-route>Instrucciones</a></li>
+          <li><a href="#autores-articulos" data-route>Artículos</a></li>
+          <li><a href="#autores-posters" data-route>Pósters</a></li>
+        </ul>
+      </li>
+      <li><a href="#instituciones" data-route>Instituciones</a></li>
+      <li class="has-sub" data-group="evento">
+        <button class="nav-parent" data-toggle="evento">Evento <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <ul class="submenu">
+          <li><a href="#evento-sedes" data-route>Sedes</a></li>
+          <li><a href="#evento-comite" data-route>Comité organizador</a></li>
+          <li><a href="#evento-programa" data-route>Programa y talleres</a></li>
+        </ul>
+      </li>
+      <li><a class="nav-cta" href="#asistir" data-route>Asistir</a></li>
+    </ul>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <span class="drawer-title">Menú</span>
+    <button class="drawer-close" id="drawerClose" aria-label="Cerrar menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a class="drawer-link" href="#inicio" data-route>Inicio</a>
+    <a class="drawer-link" href="#congreso" data-route>El congreso</a>
+    <div class="drawer-group" data-group="autores">
+      <button class="drawer-parent" data-toggle="autores">Instrucciones para autores
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="drawer-sub">
+        <a href="#autores-instrucciones" data-route>Instrucciones</a>
+        <a href="#autores-articulos" data-route>Artículos</a>
+        <a href="#autores-posters" data-route>Pósters</a>
+      </div>
+    </div>
+    <a class="drawer-link" href="#asistir" data-route>Asistir</a>
+    <a class="drawer-link" href="#instituciones" data-route>Instituciones</a>
+    <div class="drawer-group" data-group="evento">
+      <button class="drawer-parent" data-toggle="evento">Evento
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="drawer-sub">
+        <a href="#evento-sedes" data-route>Sedes</a>
+        <a href="#evento-comite" data-route>Comité organizador</a>
+        <a href="#evento-programa" data-route>Programa y talleres</a>
+      </div>
+    </div>
+  </nav>
+</aside>
+
+<main>
+
+<section class="page active" id="inicio">
+  <header class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Congreso Internacional y Congreso Nacional</p>
+        <h1>Universidad, Salud<br>y <span style="color:var(--accent);">Medio Ambiente</span></h1>
+        <p class="lede">Un punto de encuentro donde la ciencia sale del laboratorio y se vuelve conversación pública: investigadoras, investigadores, estudiantes y divulgadores comparten hallazgos sobre agua, salud y sustentabilidad que le importan a Chiapas y al país.</p>
+        <div class="hero-ctas">
+          <a class="crystal-btn solid" href="#autores-instrucciones" data-route>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Enviar mi trabajo
+          </a>
+          <a class="crystal-btn" href="#congreso" data-route>Conocer el congreso</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat-chip"><b>20</b><span>LÍNEAS TEMÁTICAS</span></div>
+          <div class="stat-chip"><b>3</b><span>INSTITUCIONES SEDE</span></div>
+          <div class="stat-chip"><b>100%</b><span>PARTICIPACIÓN GRATUITA</span></div>
+        </div>
+      </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <svg width="100%" height="100%" viewBox="0 0 360 340" style="position:absolute; inset:0;">
+          <circle class="pulse-ring" cx="180" cy="170" r="58" fill="none" stroke="var(--accent)" stroke-width="2"/>
+          <circle class="pulse-ring d2" cx="180" cy="170" r="58" fill="none" stroke="var(--leaf)" stroke-width="2"/>
+        </svg>
+        <svg class="float" width="66" height="66" viewBox="0 0 24 24" style="top:6%; left:8%;" fill="none" stroke="var(--leaf)" stroke-width="1.6"><path d="M12 22c-6-4-9-8.6-9-13A7 7 0 0 1 12 4a7 7 0 0 1 9 5c0 4.4-3 9-9 13z"/></svg>
+        <svg class="float d2" width="50" height="50" viewBox="0 0 24 24" style="top:56%; left:2%;" fill="none" stroke="var(--accent)" stroke-width="1.6"><path d="M12 3s6 6.5 6 11a6 6 0 1 1-12 0c0-4.5 6-11 6-11z"/></svg>
+        <svg class="float d3" width="56" height="56" viewBox="0 0 24 24" style="top:2%; left:60%;" fill="none" stroke="var(--violet)" stroke-width="1.6"><circle cx="12" cy="7" r="3.4"/><path d="M6 21c0-4 2.7-6.5 6-6.5S18 17 18 21" stroke-linecap="round"/></svg>
+        <svg class="float d4" width="150" height="56" viewBox="0 0 150 56" style="top:66%; left:34%;" fill="none" stroke="var(--accent)" stroke-width="2.5"><path class="heartline" d="M0 28h30l10-20 14 40 12-32 8 12h76" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+    <svg class="wave-divider" viewBox="0 0 1440 56" preserveAspectRatio="none">
+      <g class="wave-drift">
+        <path d="M0 28c120 22 240 22 360 0s240-28 360-6 240 28 360 6 240-22 360 0v28H0z"/>
+        <path d="M1440 28c120 22 240 22 360 0s240-28 360-6 240 28 360 6 240-22 360 0v28h-1440z" transform="translate(1440,0)"/>
+      </g>
+    </svg>
+  </header>
+
+  <section class="alt">
+    <div class="wrap">
+    <div class="section-head reveal">
+        <p class="eyebrow">Calendario</p>
+        <h2>Fechas importantes</h2>
+        <p class="lede">Estamos afinando el calendario oficial de UHE 2026. En cuanto el comité lo confirme, se actualiza aquí mismo.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-card reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12l4 4v12H4z"/><path d="M16 4v4h4"/><path d="M8 13h8M8 17h5"/></svg>
+          <h3>Recepción de trabajos y pósters</h3>
+          <p>Envío de artículos originales y pósters en cualquiera de los ejes temáticos.</p>
+          <span class="tag">Fechas por confirmar</span>
+        </div>
+        <div class="tl-card reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"/><path d="m8 12 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Publicación de resultados</h3>
+          <p>Notificación de trabajos aceptados e inclusión en el programa del congreso.</p>
+          <span class="tag">Fechas por confirmar</span>
+        </div>
+        <div class="tl-card reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke-linecap="round"/></svg>
+          <h3>Congreso UHE 2026</h3>
+          <p>Conferencias magistrales, mesas de discusión y talleres en las sedes participantes.</p>
+          <span class="tag">Fechas por confirmar</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="page" id="congreso">
+  <div class="wrap" style="padding-top:56px;">
+    <div class="grid-2" style="align-items:center; gap:52px;">
+      <div class="reveal">
+        <p class="eyebrow">¿Por qué UHE?</p>
+        <h2>La ciencia solo transforma cuando se comparte</h2>
+        <p>Divulgar ciencia despierta vocaciones, mejora las decisiones que tomamos sobre salud y medio ambiente, y acerca a la ciudadanía a lo que investigadoras e investigadores construyen todos los días en las aulas y los laboratorios.</p>
+        <p>México tiene una tradición científica que va de Guillermo González Camarena a Mario Molina. El reto de UHE es acortar la distancia entre ese legado y las personas que aún no lo conocen — con rigor, sin perder calidez.</p>
+      </div>
+      <blockquote class="reveal">"Sean ustedes bienvenidos al Congreso Internacional y Congreso Nacional Universidad, Salud y Ambiente." <br><small style="font-family:'Open Sans',sans-serif; font-weight:600; font-size:.8rem; color:var(--body-c);">— Comité Organizador UHE 2026</small></blockquote>
+    </div>
+
+    <div class="section-head" style="margin-top:72px;">
+      <p class="eyebrow reveal">Objetivos</p>
+      <h2 class="reveal">Cuatro razones para participar</h2>
+    </div>
+    <div class="grid-4">
+      <div class="card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="10" r="2.4"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M15.5 20c0-2.4-1-4.2-2.6-5.2A5 5 0 0 1 21 20" stroke-linecap="round"/></svg>
+        <h3>Encuentro amplio</h3>
+        <p>Reúne a investigadoras e investigadores de distintas disciplinas alrededor de la relación entre ciencia, tecnología y sociedad.</p>
+      </div>
+      <div class="card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10z"/></svg>
+        <h3>Inclusión y diversidad</h3>
+        <p>Impulsa la inclusión, la diversidad y la multiculturalidad dentro de la ciencia, la tecnología y la innovación universitarias.</p>
+      </div>
+      <div class="card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5a2 2 0 0 1 2-2h10l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+        <h3>Difusión intercultural</h3>
+        <p>Difunde la investigación científica y tecnológica de las universidades, fortaleciendo una educación intercultural.</p>
+      </div>
+      <div class="card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 3a4 4 0 0 1 4 4v2a5 5 0 0 1-5 5H9l-5 4v-4H7a5 5 0 0 1-5-5V7a4 4 0 0 1 4-4z"/></svg>
+        <h3>Intercambio de experiencias</h3>
+        <p>Abre un espacio para intercambiar experiencias de investigación e innovación entre regiones y disciplinas.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="alt" style="margin-top:72px;">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <p class="eyebrow">Convocatoria abierta</p>
+        <h2>Ejes temáticos</h2>
+        <p class="lede" style="margin:0 auto;">Veinte líneas de trabajo agrupadas en dos grandes campos. Encuentra la que mejor describe tu investigación.</p>
+      </div>
+      <div class="ejes-cols">
+        <div class="reveal">
+          <h4>Ciencia, tecnología y ambiente</h4>
+          <div class="chip-list">
+            <span class="chip">Ingeniería Hidrológica e Hidráulica</span>
+            <span class="chip">Construcción Sustentable</span>
+            <span class="chip">Nuevas Tecnologías</span>
+            <span class="chip">Energías Renovables</span>
+            <span class="chip">Ingeniería y Ciencias Ambientales</span>
+            <span class="chip">Desarrollo Sustentable</span>
+            <span class="chip">Ingenierías Verdes</span>
+            <span class="chip">Salud</span>
+            <span class="chip">Tecnologías de la Información y Comunicación</span>
+            <span class="chip">Sociedad</span>
+          </div>
+        </div>
+        <div class="reveal">
+          <h4>Sociedad, salud y sustentabilidad</h4>
+          <div class="chip-list">
+            <span class="chip">Turismo</span>
+            <span class="chip">Pequeñas y Medianas Empresas (PyMEs)</span>
+            <span class="chip">Conservación de Recursos Naturales</span>
+            <span class="chip">Contaminación Ambiental y Salud Humana</span>
+            <span class="chip">Recursos Naturales para la Alimentación</span>
+            <span class="chip">Educación Ambiental</span>
+            <span class="chip">Marketing Verde</span>
+            <span class="chip">Manejo Sustentable de Cuencas</span>
+            <span class="chip">Innovación Verde</span>
+            <span class="chip">Inclusión y Diversidad para el Mejoramiento Social</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<section class="page" id="autores-instrucciones">
+  <div class="wrap" style="padding-top:56px;">
+    <div class="subtabs">
+      <a class="subtab active" href="#autores-instrucciones" data-route>Instrucciones</a>
+      <a class="subtab" href="#autores-articulos" data-route>Artículos</a>
+      <a class="subtab" href="#autores-posters" data-route>Pósters</a>
+    </div>
+    <div class="section-head reveal">
+      <p class="eyebrow">Instrucciones para autores</p>
+      <h2>Cómo enviar tu trabajo</h2>
+      <p class="lede">Al menos una autora o autor debe registrarse, sin costo, para que el trabajo sea considerado por el comité.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        <h3>1. Regístrate</h3>
+        <p>El registro de autoras y autores es completamente gratuito y da acceso a enviar artículos o pósters.</p>
+      </div>
+      <div class="card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>2. Envía tu trabajo</h3>
+        <p>Dirige tu artículo o póster a congreso-universidad@unach.mx dentro del periodo de recepción vigente.</p>
+      </div>
+      <div class="card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v6h6"/></svg>
+        <h3>3. Cede tus derechos</h3>
+        <p>Completa el formato de cesión de derechos de autor disponible en esta sección para integrar tu trabajo a las memorias.</p>
+      </div>
+    </div>
+    <div style="margin-top:30px;">
+      <a class="crystal-btn solid" href="mailto:congreso-universidad@unach.mx?subject=UHE%202026%20-%20Env%C3%ADo%20de%20trabajo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Enviar mi trabajo por correo
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="autores-articulos">
+  <div class="wrap" style="padding-top:56px;">
+    <div class="subtabs">
+      <a class="subtab" href="#autores-instrucciones" data-route>Instrucciones</a>
+      <a class="subtab active" href="#autores-articulos" data-route>Artículos</a>
+      <a class="subtab" href="#autores-posters" data-route>Pósters</a>
+    </div>
+    <div class="section-head reveal">
+      <p class="eyebrow">Artículos</p>
+      <h2>Investigación original con impacto real</h2>
+      <p class="lede">Comparte resultados de investigación en cualquiera de los veinte ejes temáticos del congreso.</p>
+    </div>
+    <div class="card reveal" style="max-width:720px;">
+      <p>Cada artículo se evalúa por calidad técnica, innovación, relevancia y claridad. Los trabajos aceptados se integran a las memorias oficiales del congreso, con reconocimiento para todas las autoras y autores registrados.</p>
+      <p style="margin-bottom:0;">Envía tu manuscrito a <a href="mailto:congreso-universidad@unach.mx" style="color:var(--accent); font-weight:700;">congreso-universidad@unach.mx</a> dentro del periodo de recepción de trabajos.</p>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="autores-posters">
+  <div class="wrap" style="padding-top:56px;">
+    <div class="subtabs">
+      <a class="subtab" href="#autores-instrucciones" data-route>Instrucciones</a>
+      <a class="subtab" href="#autores-articulos" data-route>Artículos</a>
+      <a class="subtab active" href="#autores-posters" data-route>Pósters</a>
+    </div>
+    <div class="section-head reveal">
+      <p class="eyebrow">Pósters</p>
+      <h2>Ideas en curso, listas para el diálogo</h2>
+      <p class="lede">Un formato ágil para presentar resultados preliminares o proyectos que siguen en desarrollo.</p>
+    </div>
+    <div class="card reveal" style="max-width:720px;">
+      <p>Los pósters no se consideran publicación formal, así que puedes seguir difundiendo tu proyecto en otros espacios científicos sin restricción.</p>
+      <p style="margin-bottom:0;">Envía tu propuesta a <a href="mailto:congreso-universidad@unach.mx" style="color:var(--accent); font-weight:700;">congreso-universidad@unach.mx</a> junto con el registro gratuito de autoría.</p>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="asistir">
+  <div class="wrap" style="padding-top:56px;">
+    <div class="spotlight reveal">
+      <div class="spotlight-copy">
+        <p class="eyebrow">Asistir</p>
+        <h2>Participación 100% gratuita</h2>
+        <p>Vive días de conferencias magistrales, mesas de discusión y talleres prácticos sobre universidad, salud y medio ambiente, sin costo de inscripción.</p>
+        <ul class="check-list" style="margin-top:20px;">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Acceso a conferencias magistrales y talleres</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Reconocimiento de participación digital</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Actividades en tres sedes universitarias de Tuxtla Gutiérrez</li>
+        </ul>
+      </div>
+      <div class="spotlight-side">
+        <svg class="float" width="46" height="46" viewBox="0 0 24 24" style="position:absolute; top:14px; right:20px;" fill="none" stroke="var(--leaf)" stroke-width="1.6" aria-hidden="true"><path d="M12 22c-6-4-9-8.6-9-13A7 7 0 0 1 12 4a7 7 0 0 1 9 5c0 4.4-3 9-9 13z"/></svg>
+        <svg class="float d3" width="34" height="34" viewBox="0 0 24 24" style="position:absolute; bottom:18px; left:18px;" fill="none" stroke="var(--violet)" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="7" r="3.4"/><path d="M6 21c0-4 2.7-6.5 6-6.5S18 17 18 21" stroke-linecap="round"/></svg>
+        <svg width="130" height="130" viewBox="0 0 130 130" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:0;" aria-hidden="true">
+          <circle class="pulse-ring" cx="65" cy="65" r="46" fill="none" stroke="var(--accent)" stroke-width="2"/>
+        </svg>
+        <span class="big" style="position:relative; z-index:1;">GRATIS</span>
+        <p style="margin:0; position:relative; z-index:1;">Costo de inscripción para asistentes y autores. UHE es un espacio público de divulgación científica, abierto a la comunidad universitaria y a la sociedad en general.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="instituciones">
+  <div class="wrap" style="padding-top:56px;">
+    <div class="section-head reveal">
+      <p class="eyebrow">Instituciones</p>
+      <h2>Tres casas de estudio, un mismo congreso</h2>
+      <p class="lede">UHE 2026 se organiza de manera conjunta entre estas instituciones de Tuxtla Gutiérrez, Chiapas.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card inst-card reveal">
+        <div class="badge">UNACH</div>
+        <div class="role">Institución sede</div>
+        <h3>Universidad Autónoma de Chiapas</h3>
+        <p>Área de sede: Arquitectura e Ingeniería.</p>
+      </div>
+      <div class="card inst-card reveal">
+        <div class="badge">UNICACH</div>
+        <div class="role">Institución sede</div>
+        <h3>Universidad de Ciencias y Artes de Chiapas</h3>
+        <p>Áreas de sede: Ciencias Sociales, y Ciencias Naturales y de la Salud.</p>
+      </div>
+      <div class="card inst-card reveal">
+        <div class="badge">TecNM</div>
+        <div class="role">Institución sede</div>
+        <h3>Tecnológico Nacional de México, Campus Tuxtla</h3>
+        <p>Área de sede: Ingenierías.</p>
+      </div>
+    </div>
+    <p style="margin-top:28px; font-size:.9rem;">Consulta las áreas de sede completas y las direcciones en <a href="#evento-sedes" data-route style="color:var(--accent); font-weight:700;">Evento → Sedes</a>.</p>
+  </div>
+</section>
+
+<section class="page" id="evento-sedes">
+  <div class="wrap" style="padding-top:56px;">
+    <div class="subtabs">
+      <a class="subtab active" href="#evento-sedes" data-route>Sedes</a>
+      <a class="subtab" href="#evento-comite" data-route>Comité organizador</a>
+      <a class="subtab" href="#evento-programa" data-route>Programa y talleres</a>
+    </div>
+    <div class="section-head reveal">
+      <p class="eyebrow">Evento · Sedes</p>
+      <h2>Dónde suceden las actividades</h2>
+      <p class="lede">Tuxtla Gutiérrez, Chiapas — tres sedes universitarias, cada una con su propia área temática.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card inst-card reveal">
+        <div class="badge">UNACH</div>
+        <h3>Arquitectura e Ingeniería</h3>
+        <p>Universidad Autónoma de Chiapas.</p>
+      </div>
+      <div class="card inst-card reveal">
+        <div class="badge">UNICACH</div>
+        <h3>Ciencias Sociales · Ciencias Naturales y de la Salud</h3>
+        <p>Universidad de Ciencias y Artes de Chiapas.</p>
+      </div>
+      <div class="card inst-card reveal">
+        <div class="badge">TecNM</div>
+        <h3>Ingenierías</h3>
+        <p>Tecnológico Nacional de México, Campus Tuxtla.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="evento-comite">
+  <div class="wrap" style="padding-top:56px;">
+    <div class="subtabs">
+      <a class="subtab" href="#evento-sedes" data-route>Sedes</a>
+      <a class="subtab active" href="#evento-comite" data-route>Comité organizador</a>
+      <a class="subtab" href="#evento-programa" data-route>Programa y talleres</a>
+    </div>
+    <div class="section-head reveal">
+      <p class="eyebrow">Evento · Comité organizador</p>
+      <h2>Quiénes hacen posible UHE 2026</h2>
+      <p class="lede">Profesoras, profesores e investigadores de UNACH, UNICACH, TecNM e ICTI, organizados en cuatro coordinaciones.</p>
+    </div>
+
+    <details class="committee reveal" open>
+      <summary>Coordinación general <span class="count">16 integrantes</span></summary>
+      <ul class="committee-names">
+        <li>Dra. Adriana Caballero Roque</li>
+        <li>Dr. Arcadio Zebadúa Sánchez</li>
+        <li>Dra. Carolina Orantes García</li>
+        <li>Dra. Daisy Escobar Castillejos</li>
+        <li>Dr. Daniel Hernández Cruz</li>
+        <li>Dr. Gabriel Castañeda Nolasco</li>
+        <li>Dr. Hugo Alejandro Guillén Trujillo</li>
+        <li>Dr. Joel Moreira Acosta</li>
+        <li>Dr. José del Carmen Rejón Orantes</li>
+        <li>Dr. Juan José Cruz Solís</li>
+        <li>Biól. Jorge Coello Sesma</li>
+        <li>Dr. Madaín Pérez Patricio</li>
+        <li>Dr. Nein Farrera Vázquez</li>
+        <li>Dr. Omar Antonio de la Cruz Courtois</li>
+        <li>Dr. Pascual López de Paz</li>
+        <li>Dra. Sandra Aurora González Sánchez</li>
+      </ul>
+    </details>
+
+    <details class="committee reveal">
+      <summary>Coordinación de artículos <span class="count">8 integrantes</span></summary>
+      <ul class="committee-names">
+        <li>M. en C. Aldo Aguilar Castillejos — UVM Campus Tuxtla</li>
+        <li>Dr. Eber Alberto Godínez Domínguez — UNACH</li>
+        <li>Dra. Aracely López Grijalva — IIIER-UNICACH</li>
+        <li>Dr. David Escobar Castillejos — Universidad Panamericana</li>
+        <li>Dr. Guillermo Ibáñez Duharte — IIIER-UNICACH</li>
+        <li>M. en C. Osbaldo Y. García Ramos — UVM Campus Tuxtla</li>
+        <li>M.T.I. Ricardo Gabriel Suárez Gómez — UNACH</li>
+        <li>M.I. Rodolfo Estrada Cruz — UNACH</li>
+      </ul>
+    </details>
+
+    <details class="committee reveal">
+      <summary>Coordinación de talleres <span class="count">4 integrantes</span></summary>
+      <ul class="committee-names">
+        <li>Dra. Delva del Rocío Guichard Romero — UNACH</li>
+        <li>Mtra. Erika Díaz Pascacio — UNACH</li>
+        <li>M.I. María del Carmen González López — UNACH</li>
+        <li>Dra. Patricia Elke Rodríguez Schaeffer — UNACH</li>
+      </ul>
+    </details>
+
+    <details class="committee reveal">
+      <summary>Coordinación de programa <span class="count">UNACH · UNICACH · TecNM · ICTI</span></summary>
+      <ul class="committee-names">
+        <li>Equipo conjunto de profesoras, profesores e investigadores de las cuatro instituciones, a cargo de la programación y coordinación general del evento.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section class="page" id="evento-programa">
+  <div class="wrap" style="padding-top:56px;">
+    <div class="subtabs">
+      <a class="subtab" href="#evento-sedes" data-route>Sedes</a>
+      <a class="subtab" href="#evento-comite" data-route>Comité organizador</a>
+      <a class="subtab active" href="#evento-programa" data-route>Programa y talleres</a>
+    </div>
+    <div class="programa-banner reveal">
+      <p class="eyebrow" style="justify-content:center;">Programa y talleres</p>
+      <h2>El programa completo llega pronto</h2>
+      <p class="lede" style="margin:0 auto;">Como en ediciones anteriores, UHE reúne conferencias magistrales, mesas de discusión y talleres prácticos a lo largo de varios días. Publicaremos el programa detallado en esta misma sección en cuanto esté listo.</p>
+      <div class="dias">
+        <div class="dia"><b>Día 1</b>Programación por confirmar</div>
+        <div class="dia"><b>Día 2</b>Programación por confirmar</div>
+        <div class="dia"><b>Día 3</b>Programación por confirmar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand">
+          <img src="data:image/png;base64,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" alt="Logotipo del Congreso UHE" style="width:34px;height:44px;" />
+          <span>UHE 2026</span>
+        </div>
+        <p style="max-width:320px; margin-top:14px;">Congreso Internacional y Congreso Nacional Universidad, Salud y Ambiente. Coordinado por la Dra. Daisy Escobar Castillejos, Facultad de Ingeniería, UNACH.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4 4 0 0 0-6.9 3.6C8.3 8.6 5.7 7.2 3.8 5c-.3.6-.5 1.3-.5 2a4 4 0 0 0 1.8 3.3c-.7 0-1.3-.2-1.9-.5 0 1.9 1.4 3.6 3.2 4-.6.1-1.2.2-1.8.1.5 1.6 2 2.7 3.8 2.8-1.5 1.2-3.4 1.8-5.4 1.6 1.9 1.2 4.1 1.9 6.5 1.9 7.8 0 12-6.5 12-12.1v-.6c.8-.6 1.5-1.3 2-2.1z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.3l.4-2.7h-2.7V9.4c0-.8.2-1.3 1.4-1.3h1.4V5.7c-.7-.1-1.5-.2-2.3-.2-2.3 0-3.9 1.4-3.9 3.9v2h-2.3v2.7h2.3v7z"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2c-.2-1-.9-1.7-1.9-1.9C17.9 5 12 5 12 5s-5.9 0-7.7.3c-1 .2-1.7.9-1.9 1.9C2 9 2 12 2 12s0 3 .4 4.8c.2 1 .9 1.7 1.9 1.9C6.1 19 12 19 12 19s5.9 0 7.7-.3c1-.2 1.7-.9 1.9-1.9.4-1.8.4-4.8.4-4.8s0-3-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h3 class="footer-title">Mapa del sitio</h3>
+        <ul class="footer-contact">
+          <li><a href="#congreso" data-route>El congreso</a></li>
+          <li><a href="#autores-instrucciones" data-route>Autores</a></li>
+          <li><a href="#asistir" data-route>Asistir</a></li>
+          <li><a href="#instituciones" data-route>Instituciones</a></li>
+          <li><a href="#evento-comite" data-route>Comité organizador</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-title">Informes</h3>
+        <ul class="footer-contact">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21a8 8 0 1 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>Dra. Daisy Escobar Castillejos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10c0-4 3-8 9-8s9 4 9 8-9 12-9 12-9-8-9-12z"/><circle cx="12" cy="10" r="2.5"/></svg>Facultad de Ingeniería, UNACH — Tuxtla Gutiérrez, Chiapas</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 3.2 2 2 0 0 1 4.1 1h2a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L7.1 8.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg><a href="tel:+529613179983">(961) 317-9983</a></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><a href="mailto:congreso-universidad@unach.mx">congreso-universidad@unach.mx</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 UHE — Universidad, Salud y Ambiente. Todos los derechos reservados.</span>
+      <span>Facultad de Ingeniería · UNACH</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var PAGES = ['inicio','congreso','autores-instrucciones','autores-articulos','autores-posters','asistir','instituciones','evento-sedes','evento-comite','evento-programa'];
+  var GROUPS = { autores:['autores-instrucciones','autores-articulos','autores-posters'], evento:['evento-sedes','evento-comite','evento-programa'] };
+
+  function closeAllDropdowns(){
+    document.querySelectorAll('.nav-links li.has-sub.open').forEach(function(li){ li.classList.remove('open'); });
+  }
+
+  function showPage(id){
+    if (PAGES.indexOf(id) === -1) id = 'inicio';
+    document.querySelectorAll('.page').forEach(function(p){ p.classList.toggle('active', p.id === id); });
+    document.querySelectorAll('a[data-route]').forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+    Object.keys(GROUPS).forEach(function(g){
+      var isActiveGroup = GROUPS[g].indexOf(id) !== -1;
+      document.querySelectorAll('[data-group="' + g + '"]').forEach(function(el){
+        el.classList.toggle('has-active', isActiveGroup);
+      });
+    });
+    window.scrollTo(0,0);
+  }
+
+  function currentId(){
+    var h = location.hash.replace('#','');
+    return h || 'inicio';
+  }
+
+  window.addEventListener('hashchange', function(){ showPage(currentId()); closeMobileDrawer(); });
+  showPage(currentId());
+
+  // desktop dropdowns
+  document.querySelectorAll('.nav-links .nav-parent').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var li = btn.closest('li.has-sub');
+      var wasOpen = li.classList.contains('open');
+      closeAllDropdowns();
+      if (!wasOpen) li.classList.add('open');
+    });
+  });
+  document.addEventListener('click', function(){ closeAllDropdowns(); });
+
+  // mobile drawer accordions
+  document.querySelectorAll('.mobile-drawer .drawer-parent').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.closest('.drawer-group').classList.toggle('open');
+    });
+  });
+
+  // mobile drawer open/close
+  var drawer = document.getElementById('mobileDrawer');
+  var overlay = document.getElementById('drawerOverlay');
+  var menuBtn = document.getElementById('menuBtn');
+  var drawerClose = document.getElementById('drawerClose');
+  function openMobileDrawer(){
+    drawer.classList.add('open'); overlay.classList.add('open');
+    drawer.setAttribute('aria-hidden','false'); menuBtn.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileDrawer(){
+    drawer.classList.remove('open'); overlay.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true'); menuBtn.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }
+  menuBtn.addEventListener('click', openMobileDrawer);
+  drawerClose.addEventListener('click', closeMobileDrawer);
+  overlay.addEventListener('click', closeMobileDrawer);
+  document.querySelectorAll('.mobile-drawer a[data-route]').forEach(function(a){
+    a.addEventListener('click', closeMobileDrawer);
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMobileDrawer(); });
+
+  // scroll reveal
+  if ('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); obs.unobserve(en.target); } });
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
