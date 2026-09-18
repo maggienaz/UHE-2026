@@ -28,7 +28,7 @@
   html{scroll-behavior:smooth;}
   body{margin:0; background:var(--surface); color:var(--body-c); font-family:"Open Sans", ui-sans-serif, system-ui, sans-serif; font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;}
   h1,h2,h3,h4{font-family:"Roboto Slab", Georgia, serif; color:var(--ink); line-height:1.2; margin:0 0 .5em; text-wrap:balance;}
-  h1{font-size:clamp(2rem,4.2vw,3.2rem); font-weight:700;}
+  h1{font-size:clamp(1.9rem,3.8vw,2.9rem); font-weight:700;}
   h2{font-size:clamp(1.5rem,2.8vw,2.2rem); font-weight:700;}
   h3{font-size:1.15rem; font-weight:700;}
   p{margin:0 0 1em;}
@@ -43,35 +43,36 @@
   .eyebrow{display:inline-flex; align-items:center; gap:8px; font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin-bottom:14px;}
   .eyebrow::before{content:""; width:22px; height:2px; background:var(--accent); display:inline-block; border-radius:2px;}
   .lede{font-size:1.08rem; max-width:640px;}
-  .section-head{max-width:720px; margin-bottom:44px;}
+  .section-head{max-width:760px; margin-bottom:44px;}
   .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
   :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px;}
   .alt{background:var(--surface-alt);}
+  h3.sub{font-size:1.3rem; margin-top:44px;}
 
   /* ---------- NAV ---------- */
   .nav{position:sticky; top:0; z-index:50; backdrop-filter:blur(14px) saturate(140%); background:color-mix(in srgb, var(--surface) 82%, transparent); border-bottom:1px solid var(--border);}
-  .nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:12px; padding-bottom:12px; gap:20px;}
-  .brand{display:flex; align-items:center; gap:10px; font-family:"Roboto Slab",serif; font-weight:700; color:var(--ink); font-size:1.02rem;}
+  .nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:12px; padding-bottom:12px; gap:14px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:"Roboto Slab",serif; font-weight:700; color:var(--ink); font-size:1.02rem; flex:none;}
   .brand img{width:34px; height:44px; flex:none; object-fit:contain;}
   .brand small{display:block; font-family:"Open Sans",sans-serif; font-weight:600; font-size:.66rem; letter-spacing:.08em; color:var(--body-c); text-transform:uppercase;}
-  .nav-links{display:flex; align-items:center; gap:6px;}
+  .nav-links{display:flex; align-items:center; gap:2px;}
   .nav-links > li{position:relative;}
-  .nav-links a, .nav-parent{display:flex; align-items:center; gap:5px; padding:10px 14px; font-size:.9rem; font-weight:600; color:var(--body-c); border:none; background:none; cursor:pointer; border-radius:999px; transition:color .2s, background .2s;}
+  .nav-links a, .nav-parent{display:flex; align-items:center; gap:5px; padding:10px 11px; font-size:.86rem; font-weight:600; color:var(--body-c); border:none; background:none; cursor:pointer; border-radius:999px; transition:color .2s, background .2s; white-space:nowrap;}
   .nav-links a:hover, .nav-parent:hover{color:var(--accent);}
   .nav-links a.active{color:var(--accent); background:color-mix(in srgb, var(--accent) 10%, transparent);}
   .nav-parent svg{width:13px; height:13px; transition:transform .2s;}
   li.has-sub.open .nav-parent{color:var(--accent);}
   li.has-sub.open .nav-parent svg{transform:rotate(180deg);}
   li.has-sub.has-active .nav-parent{color:var(--accent);}
-  .submenu{position:absolute; top:calc(100% + 6px); left:0; min-width:230px; background:var(--surface-card); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow); padding:8px; display:none; flex-direction:column; gap:2px;}
+  .submenu{position:absolute; top:calc(100% + 6px); left:0; min-width:230px; background:var(--surface-card); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow); padding:8px; display:none; flex-direction:column; gap:2px; z-index:5;}
   li.has-sub.open .submenu{display:flex;}
-  .submenu a{padding:11px 13px; border-radius:9px; font-size:.88rem; color:var(--ink); font-weight:600; display:block;}
+  .submenu a{padding:11px 13px; border-radius:9px; font-size:.88rem; color:var(--ink); font-weight:600; display:block; white-space:normal;}
   .submenu a:hover{background:var(--surface-alt); color:var(--accent);}
   .submenu a.active{color:var(--accent);}
-  .nav-cta{padding:10px 22px !important; border-radius:999px; font-weight:700; background:var(--glass-bg); border:1px solid var(--glass-border); box-shadow: inset 0 1px 0 var(--glass-shine); color:var(--ink) !important;}
+  .nav-cta{padding:10px 20px !important; border-radius:999px; font-weight:700; background:var(--glass-bg); border:1px solid var(--glass-border); box-shadow: inset 0 1px 0 var(--glass-shine); color:var(--ink) !important;}
   .menu-btn{display:none; background:none; border:none; cursor:pointer; padding:6px; color:var(--ink);}
   .menu-btn svg{width:24px; height:24px;}
-  @media (max-width:900px){
+  @media (max-width:1050px){
     .nav-links{display:none;}
     .menu-btn{display:block;}
   }
@@ -91,7 +92,7 @@
   .drawer-group.open .drawer-parent{color:#0a93b0;}
   .drawer-group.open .drawer-parent svg{transform:rotate(180deg); color:#0a93b0;}
   .drawer-sub{max-height:0; overflow:hidden; transition:max-height .3s ease;}
-  .drawer-group.open .drawer-sub{max-height:240px;}
+  .drawer-group.open .drawer-sub{max-height:280px;}
   .drawer-sub a{display:block; padding:12px 10px 12px 18px; font-size:.8rem; font-weight:600; color:#5b6a70; text-transform:none; letter-spacing:0; border-bottom:1px solid #f0f2f2;}
   .drawer-sub a:hover, .drawer-sub a.active{color:#0a93b0;}
 
@@ -105,7 +106,7 @@
   .crystal-btn.ghost:hover{box-shadow:0 16px 28px -18px rgba(20,50,60,.3);}
 
   /* ---------- HERO ---------- */
-  .hero{position:relative; overflow:hidden; background:linear-gradient(160deg,#f2fcfd 0%, #f1fbf6 60%, #ffffff 100%); padding:72px 0 0;}
+  .hero{position:relative; overflow:hidden; background:linear-gradient(160deg,#f2fcfd 0%, #f1fbf6 60%, #ffffff 100%); padding:64px 0 0;}
   .hero .wrap{position:relative; z-index:2; display:grid; grid-template-columns:1.15fr .85fr; gap:40px; align-items:center; padding-bottom:64px;}
   .hero-ctas{display:flex; flex-wrap:wrap; gap:16px; margin-top:30px;}
   .hero-orbit{position:relative; height:340px;}
@@ -122,9 +123,9 @@
   .wave-drift{animation:drift 18s linear infinite;}
   @keyframes drift{from{transform:translateX(0);} to{transform:translateX(-200px);}}
   .stat-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:36px;}
-  .stat-chip{display:flex; flex-direction:column; gap:2px; padding:14px 18px; min-width:126px; border-radius:14px; background:var(--surface-card); border:1px solid var(--border); box-shadow:var(--shadow);}
-  .stat-chip b{font-family:"Roboto Slab",serif; font-size:1.4rem; color:var(--accent);}
-  .stat-chip span{font-size:.72rem; letter-spacing:.04em; color:var(--body-c);}
+  .stat-chip{display:flex; flex-direction:column; gap:2px; padding:14px 18px; min-width:118px; border-radius:14px; background:var(--surface-card); border:1px solid var(--border); box-shadow:var(--shadow);}
+  .stat-chip b{font-family:"Roboto Slab",serif; font-size:1.3rem; color:var(--accent);}
+  .stat-chip span{font-size:.7rem; letter-spacing:.04em; color:var(--body-c);}
 
   @media (prefers-reduced-motion:no-preference){
     .reveal{transform:translateY(24px); transition:transform .6s cubic-bezier(.2,.7,.2,1);}
@@ -138,7 +139,7 @@
   .subtab:not(.active):hover{color:var(--accent); border-color:var(--accent);}
 
   /* ---------- TIMELINE ---------- */
-  .timeline{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .timeline{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px;}
   .tl-card{background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius); padding:26px 22px; box-shadow:var(--shadow);}
   .tl-card .icon{width:42px; height:42px; color:var(--accent); margin-bottom:14px;}
   .tl-card .tag{display:inline-block; margin-top:10px; padding:5px 12px; border-radius:999px; font-size:.78rem; font-weight:700; background:color-mix(in srgb, var(--leaf) 14%, transparent); color:var(--leaf);}
@@ -147,18 +148,20 @@
   .grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
   .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
   .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  .grid-auto{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px;}
   .card{background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius); padding:24px 22px; box-shadow:var(--shadow);}
   .card .icon{width:36px; height:36px; color:var(--leaf); margin-bottom:12px;}
   .card h3{margin-bottom:8px;}
   .card p{font-size:.95rem; margin-bottom:0;}
   blockquote{margin:0; padding:26px 28px; border-radius:var(--radius); background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, transparent), color-mix(in srgb, var(--leaf) 8%, transparent)); border-left:4px solid var(--accent); font-family:"Roboto Slab",serif; font-size:1.1rem; color:var(--ink);}
 
-  /* ---------- EJES ---------- */
-  .ejes-cols{display:grid; grid-template-columns:1fr 1fr; gap:30px;}
-  .ejes-cols h4{font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent); margin-bottom:14px;}
+  /* ---------- CHIPS / GUIDING QUESTIONS ---------- */
   .chip-list{display:flex; flex-wrap:wrap; gap:9px;}
   .chip{padding:9px 15px; border-radius:999px; font-size:.86rem; font-weight:600; background:var(--surface-alt); border:1px solid var(--border); color:var(--ink); transition:transform .2s, border-color .2s;}
   .chip:hover{transform:translateY(-2px); border-color:var(--accent); color:var(--accent);}
+  .q-list{display:flex; flex-direction:column; gap:14px;}
+  .q-list li{display:flex; gap:14px; align-items:flex-start; padding:16px 18px; background:var(--surface-card); border:1px solid var(--border); border-radius:12px; font-size:.98rem; color:var(--ink);}
+  .q-list svg{width:22px; height:22px; flex:none; color:var(--accent); margin-top:1px;}
 
   /* ---------- ASISTIR ---------- */
   .spotlight{display:grid; grid-template-columns:1fr 1fr; border-radius:20px; overflow:hidden; box-shadow:var(--shadow); border:1px solid var(--border);}
@@ -169,23 +172,30 @@
   .check-list svg{width:20px; height:20px; flex:none; color:var(--leaf); margin-top:2px;}
 
   /* ---------- INSTITUCIONES ---------- */
-  .inst-card .badge{width:54px; height:54px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-family:"Roboto Slab",serif; font-weight:700; color:#fff; margin-bottom:14px; font-size:.9rem; background:linear-gradient(135deg, var(--accent), var(--leaf));}
+  .inst-card .badge{width:54px; height:54px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-family:"Roboto Slab",serif; font-weight:700; color:#fff; margin-bottom:14px; font-size:.85rem; background:linear-gradient(135deg, var(--accent), var(--leaf)); text-align:center; line-height:1.1; padding:4px;}
   .inst-card .role{font-size:.8rem; color:var(--accent); font-weight:700; margin-bottom:6px;}
 
-  /* ---------- COMITE ---------- */
+  /* ---------- COMITE / FAQ ---------- */
   details.committee{background:var(--surface-card); border:1px solid var(--border); border-radius:var(--radius); padding:6px 22px; margin-bottom:14px;}
-  details.committee summary{cursor:pointer; padding:16px 0; font-family:"Roboto Slab",serif; font-weight:700; color:var(--ink); display:flex; justify-content:space-between; align-items:center; list-style:none; font-size:1.02rem;}
+  details.committee summary{cursor:pointer; padding:16px 0; font-family:"Roboto Slab",serif; font-weight:700; color:var(--ink); display:flex; justify-content:space-between; align-items:center; gap:16px; list-style:none; font-size:1.02rem;}
   details.committee summary::-webkit-details-marker{display:none;}
-  details.committee summary .count{font-family:"Open Sans",sans-serif; font-weight:600; font-size:.78rem; color:var(--body-c);}
-  details.committee summary::after{content:"+"; font-size:1.3rem; color:var(--accent); transition:transform .25s;}
+  details.committee summary .count{font-family:"Open Sans",sans-serif; font-weight:600; font-size:.78rem; color:var(--body-c); white-space:nowrap;}
+  details.committee summary::after{content:"+"; font-size:1.3rem; color:var(--accent); transition:transform .25s; flex:none;}
   details.committee[open] summary::after{transform:rotate(45deg);}
   .committee-names{display:grid; grid-template-columns:repeat(2,1fr); gap:8px 20px; padding:2px 0 20px; font-size:.9rem;}
+  .committee-answer{padding:2px 0 20px; font-size:.95rem;}
 
   /* ---------- PROGRAMA ---------- */
   .programa-banner{border-radius:20px; padding:40px; text-align:center; background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, transparent), color-mix(in srgb, var(--leaf) 10%, transparent)); border:1px solid var(--border);}
-  .dias{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px;}
-  .dia{padding:18px; border-radius:14px; background:var(--surface-card); border:1px dashed var(--border);}
+  .dias{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:26px; text-align:left;}
+  .dia{padding:18px; border-radius:14px; background:var(--surface-card); border:1px solid var(--border);}
   .dia b{display:block; font-family:"Roboto Slab",serif; color:var(--ink); margin-bottom:4px;}
+  .dia span{display:block; font-size:.78rem; color:var(--accent); font-weight:700; margin-bottom:6px; text-transform:uppercase; letter-spacing:.04em;}
+
+  /* ---------- INFO STRIP (feria) ---------- */
+  .info-strip{display:flex; flex-wrap:wrap; gap:24px; align-items:center; padding:22px 26px; border-radius:16px; background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, transparent), color-mix(in srgb, var(--leaf) 10%, transparent)); border:1px solid var(--border); margin:28px 0;}
+  .info-strip .item{display:flex; align-items:center; gap:10px; font-weight:700; color:var(--ink); font-size:.98rem;}
+  .info-strip svg{width:20px; height:20px; color:var(--accent); flex:none;}
 
   /* ---------- FOOTER ---------- */
   footer{background:var(--surface-alt); border-top:3px solid transparent; border-image:linear-gradient(90deg, var(--accent), var(--leaf), var(--violet)) 1; padding:56px 0 28px;}
@@ -203,7 +213,7 @@
   @media (max-width:900px){
     .hero .wrap{grid-template-columns:1fr;}
     .hero-orbit{height:200px; margin-top:8px;}
-    .timeline, .grid-4, .grid-3, .grid-2, .ejes-cols, .footer-grid, .dias{grid-template-columns:1fr;}
+    .timeline, .grid-4, .grid-3, .grid-2, .grid-auto, .footer-grid, .dias{grid-template-columns:1fr;}
     .spotlight{grid-template-columns:1fr;}
     section{padding:56px 0;}
     .committee-names{grid-template-columns:1fr;}
@@ -229,6 +239,8 @@
           <li><a href="#autores-posters" data-route>Pósters</a></li>
         </ul>
       </li>
+      <li><a href="#feria" data-route>Feria</a></li>
+      <li><a href="#asistir" data-route>Asistir</a></li>
       <li><a href="#instituciones" data-route>Instituciones</a></li>
       <li class="has-sub" data-group="evento">
         <button class="nav-parent" data-toggle="evento">Evento <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -236,9 +248,9 @@
           <li><a href="#evento-sedes" data-route>Sedes</a></li>
           <li><a href="#evento-comite" data-route>Comité organizador</a></li>
           <li><a href="#evento-programa" data-route>Programa y talleres</a></li>
+          <li><a href="#evento-faq" data-route>Preguntas frecuentes</a></li>
         </ul>
       </li>
-      <li><a class="nav-cta" href="#asistir" data-route>Asistir</a></li>
     </ul>
     <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
@@ -267,6 +279,7 @@
         <a href="#autores-posters" data-route>Pósters</a>
       </div>
     </div>
+    <a class="drawer-link" href="#feria" data-route>Feria de Agroecología</a>
     <a class="drawer-link" href="#asistir" data-route>Asistir</a>
     <a class="drawer-link" href="#instituciones" data-route>Instituciones</a>
     <div class="drawer-group" data-group="evento">
@@ -277,6 +290,7 @@
         <a href="#evento-sedes" data-route>Sedes</a>
         <a href="#evento-comite" data-route>Comité organizador</a>
         <a href="#evento-programa" data-route>Programa y talleres</a>
+        <a href="#evento-faq" data-route>Preguntas frecuentes</a>
       </div>
     </div>
   </nav>
@@ -288,9 +302,9 @@
   <header class="hero">
     <div class="wrap">
       <div>
-        <p class="eyebrow">Congreso Internacional y Congreso Nacional</p>
-        <h1>Universidad, Salud<br>y <span style="color:var(--accent);">Medio Ambiente</span></h1>
-        <p class="lede">Un punto de encuentro donde la ciencia sale del laboratorio y se vuelve conversación pública: investigadoras, investigadores, estudiantes y divulgadores comparten hallazgos sobre agua, salud y sustentabilidad que le importan a Chiapas y al país.</p>
+        <p class="eyebrow">IX Congreso Internacional y XI Congreso Nacional</p>
+        <h1>Cuencas Bioculturales y Territorios <span style="color:var(--accent);">Resilientes</span> para la Vida</h1>
+        <p class="lede">UHE 2026 es un espacio académico de encuentro, reflexión y colaboración entre estudiantes, docentes, investigadores, instituciones, organizaciones, comunidades y sectores productivos frente a los desafíos ambientales, sociales, tecnológicos y de salud de nuestros territorios.</p>
         <div class="hero-ctas">
           <a class="crystal-btn solid" href="#autores-instrucciones" data-route>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -299,9 +313,10 @@
           <a class="crystal-btn" href="#congreso" data-route>Conocer el congreso</a>
         </div>
         <div class="stat-row">
+          <div class="stat-chip"><b>22–24 oct</b><span>UHE 2026</span></div>
           <div class="stat-chip"><b>20</b><span>LÍNEAS TEMÁTICAS</span></div>
-          <div class="stat-chip"><b>3</b><span>INSTITUCIONES SEDE</span></div>
-          <div class="stat-chip"><b>100%</b><span>PARTICIPACIÓN GRATUITA</span></div>
+          <div class="stat-chip"><b>5</b><span>MESAS ACADÉMICAS</span></div>
+          <div class="stat-chip"><b>4</b><span>INSTITUCIONES SEDE</span></div>
         </div>
       </div>
       <div class="hero-orbit" aria-hidden="true">
@@ -325,29 +340,35 @@
 
   <section class="alt">
     <div class="wrap">
-    <div class="section-head reveal">
+      <div class="section-head reveal">
         <p class="eyebrow">Calendario</p>
         <h2>Fechas importantes</h2>
-        <p class="lede">Estamos afinando el calendario oficial de UHE 2026. En cuanto el comité lo confirme, se actualiza aquí mismo.</p>
+        <p class="lede">Registro, resultados y el congreso mismo — así llega UHE 2026 este octubre.</p>
       </div>
       <div class="timeline">
         <div class="tl-card reveal">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12l4 4v12H4z"/><path d="M16 4v4h4"/><path d="M8 13h8M8 17h5"/></svg>
-          <h3>Recepción de trabajos y pósters</h3>
-          <p>Envío de artículos originales y pósters en cualquiera de los ejes temáticos.</p>
-          <span class="tag">Fechas por confirmar</span>
+          <h3>Registro de ponencias, pósteres y feria</h3>
+          <p>Del 11 de septiembre al 2 de octubre de 2026, mediante el formulario oficial.</p>
+          <span class="tag">Convocatoria abierta</span>
         </div>
         <div class="tl-card reveal">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"/><path d="m8 12 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <h3>Publicación de resultados</h3>
-          <p>Notificación de trabajos aceptados e inclusión en el programa del congreso.</p>
-          <span class="tag">Fechas por confirmar</span>
+          <p>8 de octubre de 2026. Avisos al correo registrado y en esta página.</p>
+          <span class="tag">Próximamente</span>
         </div>
         <div class="tl-card reveal">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke-linecap="round"/></svg>
           <h3>Congreso UHE 2026</h3>
-          <p>Conferencias magistrales, mesas de discusión y talleres en las sedes participantes.</p>
-          <span class="tag">Fechas por confirmar</span>
+          <p>Del 22 al 24 de octubre. Inauguración el 22, a las 9:00 h. Evento multisede, presencial y virtual.</p>
+          <span class="tag">Multisede</span>
+        </div>
+        <div class="tl-card reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22c-6-4-9-8.6-9-13A7 7 0 0 1 12 4a7 7 0 0 1 9 5c0 4.4-3 9-9 13z"/></svg>
+          <h3>Feria de Agroecología y Ecotecnias</h3>
+          <p>24 de octubre, 9:00 h, en Berriozábal, Chiapas.</p>
+          <span class="tag">Berriozábal</span>
         </div>
       </div>
     </div>
@@ -358,38 +379,76 @@
   <div class="wrap" style="padding-top:56px;">
     <div class="grid-2" style="align-items:center; gap:52px;">
       <div class="reveal">
-        <p class="eyebrow">¿Por qué UHE?</p>
-        <h2>La ciencia solo transforma cuando se comparte</h2>
-        <p>Divulgar ciencia despierta vocaciones, mejora las decisiones que tomamos sobre salud y medio ambiente, y acerca a la ciudadanía a lo que investigadoras e investigadores construyen todos los días en las aulas y los laboratorios.</p>
-        <p>México tiene una tradición científica que va de Guillermo González Camarena a Mario Molina. El reto de UHE es acortar la distancia entre ese legado y las personas que aún no lo conocen — con rigor, sin perder calidez.</p>
+        <p class="eyebrow">¿Qué es UHE 2026?</p>
+        <h2>Un encuentro para pensar los territorios que habitamos</h2>
+        <p>El IX Congreso Internacional y XI Congreso Nacional Universidad, Salud y Ambiente es un espacio académico de encuentro, reflexión y colaboración entre estudiantes, docentes, investigadores, instituciones, organizaciones, comunidades y sectores productivos interesados en los desafíos ambientales, sociales, tecnológicos y de salud de nuestros territorios.</p>
+        <p>Bajo el tema <strong>Cuencas Bioculturales y Territorios Resilientes para la Vida</strong>, esta edición orienta sus conferencias magistrales hacia el manejo integral de cuencas y las ecotecnologías: las cuencas como territorios vivos donde se relacionan el agua, la biodiversidad, la salud, las comunidades, las actividades productivas, la gobernanza y la acción climática.</p>
       </div>
-      <blockquote class="reveal">"Sean ustedes bienvenidos al Congreso Internacional y Congreso Nacional Universidad, Salud y Ambiente." <br><small style="font-family:'Open Sans',sans-serif; font-weight:600; font-size:.8rem; color:var(--body-c);">— Comité Organizador UHE 2026</small></blockquote>
+      <blockquote class="reveal">"Sean ustedes bienvenidos al IX Congreso Internacional y XI Congreso Nacional Universidad, Salud y Ambiente." <br><small style="font-family:'Open Sans',sans-serif; font-weight:600; font-size:.8rem; color:var(--body-c);">— Comité Organizador UHE 2026</small></blockquote>
     </div>
 
-    <div class="section-head" style="margin-top:72px;">
-      <p class="eyebrow reveal">Objetivos</p>
-      <h2 class="reveal">Cuatro razones para participar</h2>
+    <p style="max-width:760px; margin-top:8px;">Las mesas académicas mantienen una convocatoria amplia para ponencias y pósteres de disciplinas relacionadas con la universidad, la salud, el ambiente, la ciencia, la tecnología y la sociedad. UHE 2026 incluye además la <a href="#feria" data-route style="color:var(--accent); font-weight:700;">Feria de Agroecología y Ecotecnias</a>, para compartir prototipos, prácticas, experiencias comunitarias e innovaciones aplicadas. El congreso se realizará del 22 al 24 de octubre de 2026, como un evento multisede con actividades presenciales y virtuales.</p>
+
+    <h3 class="sub reveal">¿Por qué hablar de cuencas?</h3>
+    <div class="grid-2 reveal" style="gap:30px;">
+      <p>Una cuenca no es solamente el espacio por el que circula el agua. Es un territorio donde se relacionan ecosistemas, ciudades, comunidades, actividades productivas, infraestructura, instituciones y distintas formas de comprender y habitar el entorno. Lo que ocurre aguas arriba modifica la vida aguas abajo; por ello, las decisiones sobre agua, suelo, biodiversidad, energía y producción requieren una mirada que reconozca estas conexiones.</p>
+      <p>Chiapas posee una gran diversidad biológica y cultural, pero también enfrenta contaminación, cambios de uso del suelo, urbanización desordenada, riesgos hidrometeorológicos, desigualdad en el acceso al agua y dificultades de coordinación institucional. Pensar desde las cuencas permite analizar estos problemas de manera integral y construir acuerdos entre conocimientos científicos, saberes comunitarios, políticas públicas y soluciones tecnológicas.</p>
     </div>
-    <div class="grid-4">
+
+    <h3 class="sub reveal">¿Por qué hablar de ecotecnologías?</h3>
+    <div class="grid-2 reveal" style="gap:30px;">
+      <p>Las ecotecnologías buscan atender necesidades concretas mediante soluciones que reducen los impactos ambientales y responden a las condiciones sociales, culturales y económicas de cada territorio. Su pertinencia no depende únicamente de que una tecnología funcione, sino también de que pueda mantenerse, adaptarse, evaluarse y ser apropiada por las personas y comunidades que la utilizan.</p>
+      <p>En UHE 2026, las ecotecnologías se abordan como parte de procesos más amplios de gestión territorial. La captación de agua de lluvia, el saneamiento, la eficiencia energética, el manejo de residuos, la producción agroecológica, el monitoreo ambiental y otras soluciones dialogan con la gobernanza, la participación social y la justicia ambiental.</p>
+    </div>
+
+    <h3 class="sub reveal">Preguntas que orientan UHE 2026</h3>
+    <ul class="q-list reveal">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9.1 9a3 3 0 1 1 4 2.8c-.8.3-1.1.9-1.1 1.7v.5"/><circle cx="12" cy="17" r=".3" fill="currentColor"/><circle cx="12" cy="12" r="9"/></svg>¿Cómo gestionar las cuencas como territorios compartidos y no solamente como unidades físicas?</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9.1 9a3 3 0 1 1 4 2.8c-.8.3-1.1.9-1.1 1.7v.5"/><circle cx="12" cy="17" r=".3" fill="currentColor"/><circle cx="12" cy="12" r="9"/></svg>¿Qué conocimientos y acuerdos necesitan las comunidades e instituciones para responder a la crisis hídrica y climática?</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9.1 9a3 3 0 1 1 4 2.8c-.8.3-1.1.9-1.1 1.7v.5"/><circle cx="12" cy="17" r=".3" fill="currentColor"/><circle cx="12" cy="12" r="9"/></svg>¿Cuándo una solución ambiental puede considerarse una ecotecnología pertinente para su territorio?</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9.1 9a3 3 0 1 1 4 2.8c-.8.3-1.1.9-1.1 1.7v.5"/><circle cx="12" cy="17" r=".3" fill="currentColor"/><circle cx="12" cy="12" r="9"/></svg>¿Cómo articular la ciencia, la innovación, los saberes locales y la participación social sin perder rigor ni contexto?</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9.1 9a3 3 0 1 1 4 2.8c-.8.3-1.1.9-1.1 1.7v.5"/><circle cx="12" cy="17" r=".3" fill="currentColor"/><circle cx="12" cy="12" r="9"/></svg>¿Qué papel corresponde a las universidades en la investigación, la formación profesional y la transformación territorial?</li>
+    </ul>
+
+    <div class="section-head" style="margin-top:64px;">
+      <p class="eyebrow reveal">Objetivos</p>
+      <h2 class="reveal">Lo que buscamos con UHE 2026</h2>
+    </div>
+    <div class="grid-auto">
       <div class="card reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="10" r="2.4"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M15.5 20c0-2.4-1-4.2-2.6-5.2A5 5 0 0 1 21 20" stroke-linecap="round"/></svg>
-        <h3>Encuentro amplio</h3>
-        <p>Reúne a investigadoras e investigadores de distintas disciplinas alrededor de la relación entre ciencia, tecnología y sociedad.</p>
-      </div>
-      <div class="card reveal">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10z"/></svg>
-        <h3>Inclusión y diversidad</h3>
-        <p>Impulsa la inclusión, la diversidad y la multiculturalidad dentro de la ciencia, la tecnología y la innovación universitarias.</p>
+        <h3>Encuentro y colaboración</h3>
+        <p>Entre estudiantes, docentes, investigadores, instituciones, organizaciones, comunidades y sectores productivos interesados en la universidad, la salud y el ambiente.</p>
       </div>
       <div class="card reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5a2 2 0 0 1 2-2h10l4 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
-        <h3>Difusión intercultural</h3>
-        <p>Difunde la investigación científica y tecnológica de las universidades, fortaleciendo una educación intercultural.</p>
+        <h3>Difusión de investigación</h3>
+        <p>Investigaciones, experiencias, innovaciones y soluciones ante los desafíos ambientales, sociales, tecnológicos y de salud de los territorios.</p>
+      </div>
+      <div class="card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22c-6-4-9-8.6-9-13A7 7 0 0 1 12 4a7 7 0 0 1 9 5c0 4.4-3 9-9 13z"/></svg>
+        <h3>Cuencas bioculturales</h3>
+        <p>Reflexión sobre las cuencas como territorios donde se relacionan el agua, la biodiversidad, la salud, las comunidades, las actividades productivas y la gobernanza.</p>
+      </div>
+      <div class="card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 3 14h7l-1 8 10-12h-7z" stroke-linejoin="round"/></svg>
+        <h3>Ecotecnologías pertinentes</h3>
+        <p>Análisis del papel de las ecotecnologías como soluciones pertinentes, accesibles, evaluables, adaptables y apropiadas socialmente.</p>
       </div>
       <div class="card reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 3a4 4 0 0 1 4 4v2a5 5 0 0 1-5 5H9l-5 4v-4H7a5 5 0 0 1-5-5V7a4 4 0 0 1 4-4z"/></svg>
-        <h3>Intercambio de experiencias</h3>
-        <p>Abre un espacio para intercambiar experiencias de investigación e innovación entre regiones y disciplinas.</p>
+        <h3>Diálogo de saberes</h3>
+        <p>Entre el conocimiento científico, la innovación tecnológica, los saberes comunitarios, las políticas públicas y la participación social.</p>
+      </div>
+      <div class="card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 5.5-7 10-7 10z"/></svg>
+        <h3>Inclusión e interculturalidad</h3>
+        <p>Promoción de la inclusión, la diversidad, la interculturalidad y la responsabilidad social en la ciencia, la tecnología y la innovación.</p>
+      </div>
+      <div class="card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="2.6"/><circle cx="18" cy="6" r="2.6"/><circle cx="12" cy="18" r="2.6"/><path d="M8.2 7.4 10.5 15.6M15.8 7.4 13.5 15.6M8.6 6h6.8" stroke-linecap="round"/></svg>
+        <h3>Redes de colaboración</h3>
+        <p>Que contribuyan a la gestión integral de las cuencas, la acción climática y la construcción de territorios sostenibles, equitativos y resilientes.</p>
       </div>
     </div>
   </div>
@@ -398,40 +457,54 @@
     <div class="wrap">
       <div class="section-head center reveal">
         <p class="eyebrow">Convocatoria abierta</p>
-        <h2>Ejes temáticos</h2>
-        <p class="lede" style="margin:0 auto;">Veinte líneas de trabajo agrupadas en dos grandes campos. Encuentra la que mejor describe tu investigación.</p>
+        <h2>Áreas temáticas</h2>
+        <p class="lede" style="margin:0 auto;">Cinco mesas propuestas reúnen trabajos de distintas áreas y metodologías.</p>
       </div>
-      <div class="ejes-cols">
-        <div class="reveal">
-          <h4>Ciencia, tecnología y ambiente</h4>
-          <div class="chip-list">
-            <span class="chip">Ingeniería Hidrológica e Hidráulica</span>
-            <span class="chip">Construcción Sustentable</span>
-            <span class="chip">Nuevas Tecnologías</span>
-            <span class="chip">Energías Renovables</span>
-            <span class="chip">Ingeniería y Ciencias Ambientales</span>
-            <span class="chip">Desarrollo Sustentable</span>
-            <span class="chip">Ingenierías Verdes</span>
-            <span class="chip">Salud</span>
-            <span class="chip">Tecnologías de la Información y Comunicación</span>
-            <span class="chip">Sociedad</span>
-          </div>
+      <div class="grid-auto">
+        <div class="card reveal">
+          <h3>Cuencas y recursos hídricos</h3>
+          <p>Ingeniería hidrológica e hidráulica, manejo sustentable de cuencas, agua y saneamiento, calidad del agua, construcción sustentable, ordenamiento territorial y gestión del riesgo.</p>
         </div>
-        <div class="reveal">
-          <h4>Sociedad, salud y sustentabilidad</h4>
-          <div class="chip-list">
-            <span class="chip">Turismo</span>
-            <span class="chip">Pequeñas y Medianas Empresas (PyMEs)</span>
-            <span class="chip">Conservación de Recursos Naturales</span>
-            <span class="chip">Contaminación Ambiental y Salud Humana</span>
-            <span class="chip">Recursos Naturales para la Alimentación</span>
-            <span class="chip">Educación Ambiental</span>
-            <span class="chip">Marketing Verde</span>
-            <span class="chip">Manejo Sustentable de Cuencas</span>
-            <span class="chip">Innovación Verde</span>
-            <span class="chip">Inclusión y Diversidad para el Mejoramiento Social</span>
-          </div>
+        <div class="card reveal">
+          <h3>Biodiversidad y restauración</h3>
+          <p>Conservación y aprovechamiento de recursos naturales, restauración ecológica, agroecología, recursos para la alimentación, turismo de naturaleza y producción sostenible.</p>
         </div>
+        <div class="card reveal">
+          <h3>Cambio climático y resiliencia</h3>
+          <p>Acción climática, energías renovables, ingenierías verdes, ecotecnologías, innovación, adaptación, mitigación, ciudades y comunidades resilientes.</p>
+        </div>
+        <div class="card reveal">
+          <h3>Salud ambiental y One Health</h3>
+          <p>Contaminación ambiental y salud humana, salud comunitaria, riesgos sanitarios, relaciones entre ambiente, animales y personas, y tecnologías aplicadas a la prevención.</p>
+        </div>
+        <div class="card reveal">
+          <h3>Gobernanza y participación</h3>
+          <p>Educación ambiental, inclusión y diversidad, sociedad, políticas públicas, participación comunitaria, tecnologías de información, PyMEs, economía y comunicación para la sostenibilidad.</p>
+        </div>
+      </div>
+
+      <h4 class="reveal" style="margin-top:44px; font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent);">Líneas temáticas transversales</h4>
+      <div class="chip-list reveal">
+        <span class="chip">Ingeniería Hidrológica e Hidráulica</span>
+        <span class="chip">Construcción Sustentable</span>
+        <span class="chip">Nuevas Tecnologías</span>
+        <span class="chip">Energías Renovables</span>
+        <span class="chip">Ingeniería y Ciencias Ambientales</span>
+        <span class="chip">Desarrollo Sustentable</span>
+        <span class="chip">Ingenierías Verdes</span>
+        <span class="chip">Salud</span>
+        <span class="chip">Tecnologías de la Información y Comunicación</span>
+        <span class="chip">Sociedad</span>
+        <span class="chip">Turismo</span>
+        <span class="chip">Pequeñas y Medianas Empresas</span>
+        <span class="chip">Conservación y Aprovechamiento Sustentable de Recursos Naturales</span>
+        <span class="chip">Contaminación Ambiental y Salud Humana</span>
+        <span class="chip">Recursos Naturales para la Alimentación</span>
+        <span class="chip">Educación Ambiental</span>
+        <span class="chip">Marketing Verde</span>
+        <span class="chip">Manejo Sustentable de Cuencas</span>
+        <span class="chip">Innovación Verde</span>
+        <span class="chip">Inclusión, Diversidad y Mejoramiento Social</span>
       </div>
     </div>
   </section>
@@ -447,26 +520,27 @@
     <div class="section-head reveal">
       <p class="eyebrow">Instrucciones para autores</p>
       <h2>Cómo enviar tu trabajo</h2>
-      <p class="lede">Al menos una autora o autor debe registrarse, sin costo, para que el trabajo sea considerado por el comité.</p>
+      <p class="lede">Invitamos a autoras y autores nacionales e internacionales a enviar trabajos y pósteres originales relacionados con Ingeniería, Desarrollo Sustentable, Ciencias Ambientales, Salud, Ciencia, Tecnología y Sociedad, y las demás líneas temáticas de UHE 2026.</p>
     </div>
     <div class="grid-3">
       <div class="card reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
         <h3>1. Regístrate</h3>
-        <p>El registro de autoras y autores es completamente gratuito y da acceso a enviar artículos o pósters.</p>
+        <p>Al menos una de las personas autoras debe completar el registro correspondiente, sin costo, para que la propuesta pueda evaluarse.</p>
       </div>
       <div class="card reveal">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <h3>2. Envía tu trabajo</h3>
-        <p>Dirige tu artículo o póster a congreso-universidad@unach.mx dentro del periodo de recepción vigente.</p>
+        <p>Del 11 de septiembre al 2 de octubre de 2026, mediante el formulario oficial o escribiendo a congreso-universidad@unach.mx.</p>
       </div>
       <div class="card reveal">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5a2 2 0 0 1 2-2h8l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M14 3v6h6"/></svg>
-        <h3>3. Cede tus derechos</h3>
-        <p>Completa el formato de cesión de derechos de autor disponible en esta sección para integrar tu trabajo a las memorias.</p>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        <h3>3. Espera resultados</h3>
+        <p>La publicación de resultados es el 8 de octubre de 2026. Los trabajos aceptados se incorporan al programa o a las memorias del congreso.</p>
       </div>
     </div>
-    <div style="margin-top:30px;">
+    <p style="margin-top:24px; font-size:.92rem;">Cada propuesta se evalúa con base en su calidad académica y técnica, originalidad, pertinencia, claridad y contribución al área correspondiente.</p>
+    <div style="margin-top:18px;">
       <a class="crystal-btn solid" href="mailto:congreso-universidad@unach.mx?subject=UHE%202026%20-%20Env%C3%ADo%20de%20trabajo">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Enviar mi trabajo por correo
@@ -485,11 +559,11 @@
     <div class="section-head reveal">
       <p class="eyebrow">Artículos</p>
       <h2>Investigación original con impacto real</h2>
-      <p class="lede">Comparte resultados de investigación en cualquiera de los veinte ejes temáticos del congreso.</p>
+      <p class="lede">Comparte resultados de investigación en cualquiera de las cinco mesas académicas y las veinte líneas temáticas del congreso.</p>
     </div>
     <div class="card reveal" style="max-width:720px;">
-      <p>Cada artículo se evalúa por calidad técnica, innovación, relevancia y claridad. Los trabajos aceptados se integran a las memorias oficiales del congreso, con reconocimiento para todas las autoras y autores registrados.</p>
-      <p style="margin-bottom:0;">Envía tu manuscrito a <a href="mailto:congreso-universidad@unach.mx" style="color:var(--accent); font-weight:700;">congreso-universidad@unach.mx</a> dentro del periodo de recepción de trabajos.</p>
+      <p>Cada propuesta se evalúa con base en su calidad académica y técnica, originalidad, pertinencia, claridad y contribución al área correspondiente. Para que un artículo sea considerado para su presentación e inclusión en las memorias del congreso, al menos una de las personas autoras deberá completar el registro correspondiente.</p>
+      <p style="margin-bottom:0;">La recepción de trabajos está abierta del 11 de septiembre al 2 de octubre de 2026. Envía tu manuscrito a <a href="mailto:congreso-universidad@unach.mx" style="color:var(--accent); font-weight:700;">congreso-universidad@unach.mx</a>.</p>
     </div>
   </div>
 </section>
@@ -504,12 +578,56 @@
     <div class="section-head reveal">
       <p class="eyebrow">Pósters</p>
       <h2>Ideas en curso, listas para el diálogo</h2>
-      <p class="lede">Un formato ágil para presentar resultados preliminares o proyectos que siguen en desarrollo.</p>
+      <p class="lede">La sesión de pósteres científicos de UHE 2026 es un formato ágil para presentar resultados preliminares o proyectos en desarrollo.</p>
     </div>
     <div class="card reveal" style="max-width:720px;">
-      <p>Los pósters no se consideran publicación formal, así que puedes seguir difundiendo tu proyecto en otros espacios científicos sin restricción.</p>
-      <p style="margin-bottom:0;">Envía tu propuesta a <a href="mailto:congreso-universidad@unach.mx" style="color:var(--accent); font-weight:700;">congreso-universidad@unach.mx</a> junto con el registro gratuito de autoría.</p>
+      <p>Los pósteres no constituyen publicaciones formales, así que los trabajos presentados podrán enviarse posteriormente a revistas u otros medios académicos. La persona autora debe estar presente para discutir y defender el póster durante la sesión correspondiente.</p>
+      <p style="margin-bottom:0;">Envía tu propuesta a <a href="mailto:congreso-universidad@unach.mx" style="color:var(--accent); font-weight:700;">congreso-universidad@unach.mx</a> junto con el registro gratuito de autoría, antes del 2 de octubre de 2026.</p>
     </div>
+  </div>
+</section>
+
+<section class="page" id="feria">
+  <div class="wrap" style="padding-top:56px;">
+    <div class="section-head reveal">
+      <p class="eyebrow">Feria de Agroecología y Ecotecnias</p>
+      <h2>Saberes, tecnologías y comunidades por un territorio sostenible</h2>
+      <p class="lede">La Feria de Agroecología y Ecotecnias Berriozábal 2026 es un espacio de encuentro entre conocimientos comunitarios, experiencias productivas, investigación e innovación aplicada, para compartir soluciones sobre agua, energía, residuos, suelos, producción agroecológica y bienestar comunitario.</p>
+    </div>
+    <p style="max-width:760px;">Pueden participar estudiantes, docentes, investigadores, productores, colectivos, organizaciones y público en general que desarrollen prototipos, prácticas, experiencias o innovaciones con aplicación ambiental y social.</p>
+
+    <div class="info-strip reveal">
+      <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke-linecap="round"/></svg>24 de octubre de 2026</div>
+      <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg>09:00 h</div>
+      <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10c0-4 3-8 9-8s9 4 9 8-9 12-9 12-9-8-9-12z"/><circle cx="12" cy="10" r="2.5"/></svg>Berriozábal, Chiapas</div>
+    </div>
+
+    <h3 class="sub reveal">Qué se puede presentar</h3>
+    <ul class="check-list reveal" style="max-width:640px;">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Prototipos de ecotecnias</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Innovaciones tecnológicas sustentables</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Sistemas de producción agroecológica</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Soluciones para el manejo de agua, energía, residuos y suelos</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Experiencias comunitarias y productivas</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Procesos educativos o de apropiación social de tecnologías</li>
+    </ul>
+
+    <h3 class="sub reveal">Modalidades de participación</h3>
+    <div class="grid-3">
+      <div class="card reveal">
+        <h3>Ponencia oral</h3>
+        <p>Presentación presencial o virtual de trabajos aceptados conforme a los lineamientos del congreso.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Póster científico</h3>
+        <p>Presentación gráfica y defensa presencial del trabajo durante la sesión correspondiente.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Feria de Agroecología y Ecotecnias</h3>
+        <p>Exhibición de prototipos, experiencias, prácticas e innovaciones con aplicación territorial.</p>
+      </div>
+    </div>
+    <p style="margin-top:24px; font-size:.92rem;">Para solicitar información adicional sobre la feria o las propuestas de participación, escribe a <a href="mailto:congreso-universidad@unach.mx" style="color:var(--accent); font-weight:700;">congreso-universidad@unach.mx</a>.</p>
   </div>
 </section>
 
@@ -518,12 +636,12 @@
     <div class="spotlight reveal">
       <div class="spotlight-copy">
         <p class="eyebrow">Asistir</p>
-        <h2>Participación 100% gratuita</h2>
-        <p>Vive días de conferencias magistrales, mesas de discusión y talleres prácticos sobre universidad, salud y medio ambiente, sin costo de inscripción.</p>
+        <h2>Evento gratuito</h2>
+        <p>El registro y la participación en UHE 2026 son completamente gratuitos. Con el propósito de impulsar la divulgación de la ciencia, la tecnología y el conocimiento en Chiapas, las instituciones participantes ofrecen acceso gratuito a las conferencias magistrales, ponencias y demás actividades académicas abiertas del congreso.</p>
         <ul class="check-list" style="margin-top:20px;">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Acceso a conferencias magistrales y talleres</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Reconocimiento de participación digital</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Actividades en tres sedes universitarias de Tuxtla Gutiérrez</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Entrada gratuita a conferencias magistrales y actividades abiertas</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Reconocimiento digital de participación para asistentes</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>Registro gratuito para autoras y autores que deseen presentar artículo o póster</li>
         </ul>
       </div>
       <div class="spotlight-side">
@@ -533,7 +651,7 @@
           <circle class="pulse-ring" cx="65" cy="65" r="46" fill="none" stroke="var(--accent)" stroke-width="2"/>
         </svg>
         <span class="big" style="position:relative; z-index:1;">GRATIS</span>
-        <p style="margin:0; position:relative; z-index:1;">Costo de inscripción para asistentes y autores. UHE es un espacio público de divulgación científica, abierto a la comunidad universitaria y a la sociedad en general.</p>
+        <p style="margin:0; position:relative; z-index:1;">UHE 2026 se realiza como evento multisede, con actividades en la Escuela de Tecnologías Digitales Aplicadas de la Benemérita Universidad Autónoma de Chiapas, la Universidad de Ciencias y Artes de Chiapas, el Tecnológico Nacional de México campus Tuxtla Gutiérrez, la Universidad Politécnica de Chiapas y el municipio de Berriozábal, Chiapas.</p>
       </div>
     </div>
   </div>
@@ -543,30 +661,36 @@
   <div class="wrap" style="padding-top:56px;">
     <div class="section-head reveal">
       <p class="eyebrow">Instituciones</p>
-      <h2>Tres casas de estudio, un mismo congreso</h2>
+      <h2>Cuatro instituciones, un mismo congreso</h2>
       <p class="lede">UHE 2026 se organiza de manera conjunta entre estas instituciones de Tuxtla Gutiérrez, Chiapas.</p>
     </div>
-    <div class="grid-3">
+    <div class="grid-4">
       <div class="card inst-card reveal">
         <div class="badge">UNACH</div>
         <div class="role">Institución sede</div>
-        <h3>Universidad Autónoma de Chiapas</h3>
-        <p>Área de sede: Arquitectura e Ingeniería.</p>
+        <h3>Escuela de Tecnologías Digitales Aplicadas</h3>
+        <p>Benemérita Universidad Autónoma de Chiapas.</p>
       </div>
       <div class="card inst-card reveal">
         <div class="badge">UNICACH</div>
         <div class="role">Institución sede</div>
         <h3>Universidad de Ciencias y Artes de Chiapas</h3>
-        <p>Áreas de sede: Ciencias Sociales, y Ciencias Naturales y de la Salud.</p>
+        <p>Tuxtla Gutiérrez, Chiapas.</p>
       </div>
       <div class="card inst-card reveal">
         <div class="badge">TecNM</div>
         <div class="role">Institución sede</div>
-        <h3>Tecnológico Nacional de México, Campus Tuxtla</h3>
-        <p>Área de sede: Ingenierías.</p>
+        <h3>Tecnológico Nacional de México</h3>
+        <p>Campus Tuxtla Gutiérrez.</p>
+      </div>
+      <div class="card inst-card reveal">
+        <div class="badge">UP Chiapas</div>
+        <div class="role">Institución sede</div>
+        <h3>Universidad Politécnica de Chiapas</h3>
+        <p>Tuxtla Gutiérrez, Chiapas.</p>
       </div>
     </div>
-    <p style="margin-top:28px; font-size:.9rem;">Consulta las áreas de sede completas y las direcciones en <a href="#evento-sedes" data-route style="color:var(--accent); font-weight:700;">Evento → Sedes</a>.</p>
+    <p style="margin-top:28px; font-size:.9rem;">UHE 2026 tiene además una sede especial en el municipio de <strong>Berriozábal, Chiapas</strong>, donde se realiza la <a href="#feria" data-route style="color:var(--accent); font-weight:700;">Feria de Agroecología y Ecotecnias</a> el 24 de octubre. Consulta el detalle de cada sede en <a href="#evento-sedes" data-route style="color:var(--accent); font-weight:700;">Evento → Sedes</a>.</p>
   </div>
 </section>
 
@@ -576,27 +700,38 @@
       <a class="subtab active" href="#evento-sedes" data-route>Sedes</a>
       <a class="subtab" href="#evento-comite" data-route>Comité organizador</a>
       <a class="subtab" href="#evento-programa" data-route>Programa y talleres</a>
+      <a class="subtab" href="#evento-faq" data-route>Preguntas frecuentes</a>
     </div>
     <div class="section-head reveal">
       <p class="eyebrow">Evento · Sedes</p>
       <h2>Dónde suceden las actividades</h2>
-      <p class="lede">Tuxtla Gutiérrez, Chiapas — tres sedes universitarias, cada una con su propia área temática.</p>
+      <p class="lede">UHE 2026 es un evento multisede en Tuxtla Gutiérrez y Berriozábal, Chiapas. El programa detallado indicará la sede, modalidad, fecha y horario de cada actividad.</p>
     </div>
-    <div class="grid-3">
+    <div class="grid-auto">
       <div class="card inst-card reveal">
         <div class="badge">UNACH</div>
-        <h3>Arquitectura e Ingeniería</h3>
-        <p>Universidad Autónoma de Chiapas.</p>
+        <h3>Escuela de Tecnologías Digitales Aplicadas</h3>
+        <p>Benemérita Universidad Autónoma de Chiapas.</p>
       </div>
       <div class="card inst-card reveal">
         <div class="badge">UNICACH</div>
-        <h3>Ciencias Sociales · Ciencias Naturales y de la Salud</h3>
-        <p>Universidad de Ciencias y Artes de Chiapas.</p>
+        <h3>Universidad de Ciencias y Artes de Chiapas</h3>
+        <p>Tuxtla Gutiérrez, Chiapas.</p>
       </div>
       <div class="card inst-card reveal">
         <div class="badge">TecNM</div>
-        <h3>Ingenierías</h3>
-        <p>Tecnológico Nacional de México, Campus Tuxtla.</p>
+        <h3>Tecnológico Nacional de México</h3>
+        <p>Campus Tuxtla Gutiérrez.</p>
+      </div>
+      <div class="card inst-card reveal">
+        <div class="badge">UP Chiapas</div>
+        <h3>Universidad Politécnica de Chiapas</h3>
+        <p>Tuxtla Gutiérrez, Chiapas.</p>
+      </div>
+      <div class="card inst-card reveal">
+        <div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:24px;height:24px;"><path d="M12 22c-6-4-9-8.6-9-13A7 7 0 0 1 12 4a7 7 0 0 1 9 5c0 4.4-3 9-9 13z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.3"/></svg></div>
+        <h3>Feria de Agroecología y Ecotecnias</h3>
+        <p>Municipio de Berriozábal, Chiapas — 24 de octubre, 9:00 h.</p>
       </div>
     </div>
   </div>
@@ -608,63 +743,65 @@
       <a class="subtab" href="#evento-sedes" data-route>Sedes</a>
       <a class="subtab active" href="#evento-comite" data-route>Comité organizador</a>
       <a class="subtab" href="#evento-programa" data-route>Programa y talleres</a>
+      <a class="subtab" href="#evento-faq" data-route>Preguntas frecuentes</a>
     </div>
     <div class="section-head reveal">
       <p class="eyebrow">Evento · Comité organizador</p>
       <h2>Quiénes hacen posible UHE 2026</h2>
-      <p class="lede">Profesoras, profesores e investigadores de UNACH, UNICACH, TecNM e ICTI, organizados en cuatro coordinaciones.</p>
+      <p class="lede">Profesoras, profesores e investigadores de las instituciones organizadoras, distribuidos en cuatro coordinaciones.</p>
     </div>
 
     <details class="committee reveal" open>
-      <summary>Coordinación general <span class="count">16 integrantes</span></summary>
+      <summary>Coordinación general <span class="count">12 integrantes</span></summary>
       <ul class="committee-names">
         <li>Dra. Adriana Caballero Roque</li>
-        <li>Dr. Arcadio Zebadúa Sánchez</li>
         <li>Dra. Carolina Orantes García</li>
         <li>Dra. Daisy Escobar Castillejos</li>
         <li>Dr. Daniel Hernández Cruz</li>
         <li>Dr. Gabriel Castañeda Nolasco</li>
         <li>Dr. Hugo Alejandro Guillén Trujillo</li>
         <li>Dr. Joel Moreira Acosta</li>
-        <li>Dr. José del Carmen Rejón Orantes</li>
         <li>Dr. Juan José Cruz Solís</li>
-        <li>Biól. Jorge Coello Sesma</li>
-        <li>Dr. Madaín Pérez Patricio</li>
+        <li>Biol. Jorge Coello Sesma</li>
         <li>Dr. Nein Farrera Vázquez</li>
-        <li>Dr. Omar Antonio de la Cruz Courtois</li>
         <li>Dr. Pascual López de Paz</li>
         <li>Dra. Sandra Aurora González Sánchez</li>
       </ul>
     </details>
 
     <details class="committee reveal">
-      <summary>Coordinación de artículos <span class="count">8 integrantes</span></summary>
+      <summary>Coordinación de artículos <span class="count">7 integrantes</span></summary>
       <ul class="committee-names">
-        <li>M. en C. Aldo Aguilar Castillejos — UVM Campus Tuxtla</li>
-        <li>Dr. Eber Alberto Godínez Domínguez — UNACH</li>
-        <li>Dra. Aracely López Grijalva — IIIER-UNICACH</li>
-        <li>Dr. David Escobar Castillejos — Universidad Panamericana</li>
-        <li>Dr. Guillermo Ibáñez Duharte — IIIER-UNICACH</li>
-        <li>M. en C. Osbaldo Y. García Ramos — UVM Campus Tuxtla</li>
-        <li>M.T.I. Ricardo Gabriel Suárez Gómez — UNACH</li>
-        <li>M.I. Rodolfo Estrada Cruz — UNACH</li>
+        <li>M. en C. Aldo Aguilar Castillejos</li>
+        <li>Dr. Eber Alberto Godínez Domínguez</li>
+        <li>Dr. David Escobar Castillejos</li>
+        <li>Dr. Guillermo Ibáñez Duharte</li>
+        <li>M. en C. Osbaldo Y. García Ramos</li>
+        <li>M.T.I. Ricardo Gabriel Suárez Gómez</li>
+        <li>M.I. Rodolfo Estrada Cruz</li>
       </ul>
     </details>
 
     <details class="committee reveal">
-      <summary>Coordinación de talleres <span class="count">4 integrantes</span></summary>
+      <summary>Coordinación de talleres <span class="count">3 integrantes</span></summary>
       <ul class="committee-names">
-        <li>Dra. Delva del Rocío Guichard Romero — UNACH</li>
-        <li>Mtra. Erika Díaz Pascacio — UNACH</li>
-        <li>M.I. María del Carmen González López — UNACH</li>
-        <li>Dra. Patricia Elke Rodríguez Schaeffer — UNACH</li>
+        <li>Mtra. Erika Díaz Pascacio</li>
+        <li>M.I. María del Carmen González López</li>
+        <li>Dr. Madaín Pérez Patricio</li>
       </ul>
     </details>
 
     <details class="committee reveal">
-      <summary>Coordinación de programa <span class="count">UNACH · UNICACH · TecNM · ICTI</span></summary>
+      <summary>Coordinación de programa <span class="count">8 integrantes</span></summary>
       <ul class="committee-names">
-        <li>Equipo conjunto de profesoras, profesores e investigadores de las cuatro instituciones, a cargo de la programación y coordinación general del evento.</li>
+        <li>Dr. Alexander López González</li>
+        <li>Dr. Gabriel Ballinas Salazar</li>
+        <li>Dr. Hugo Alejandro Nájera Aguilar</li>
+        <li>Dr. Jesús Alejandro Cabrera Madrid</li>
+        <li>Dr. Jesús Alexander Zea Estrada</li>
+        <li>Dr. Joel Moreira Acosta</li>
+        <li>Dr. Joel Pantoja Enríquez</li>
+        <li>Dr. Rubén Antonio Moreno Moreno</li>
       </ul>
     </details>
   </div>
@@ -676,17 +813,75 @@
       <a class="subtab" href="#evento-sedes" data-route>Sedes</a>
       <a class="subtab" href="#evento-comite" data-route>Comité organizador</a>
       <a class="subtab active" href="#evento-programa" data-route>Programa y talleres</a>
+      <a class="subtab" href="#evento-faq" data-route>Preguntas frecuentes</a>
     </div>
     <div class="programa-banner reveal">
       <p class="eyebrow" style="justify-content:center;">Programa y talleres</p>
-      <h2>El programa completo llega pronto</h2>
-      <p class="lede" style="margin:0 auto;">Como en ediciones anteriores, UHE reúne conferencias magistrales, mesas de discusión y talleres prácticos a lo largo de varios días. Publicaremos el programa detallado en esta misma sección en cuanto esté listo.</p>
+      <h2>Tres días, un mismo territorio</h2>
+      <p class="lede" style="margin:0 auto;">UHE 2026 reúne conferencias magistrales, mesas académicas, talleres y la Feria de Agroecología y Ecotecnias. El programa detallado con horarios y sedes se publicará próximamente en esta misma sección.</p>
       <div class="dias">
-        <div class="dia"><b>Día 1</b>Programación por confirmar</div>
-        <div class="dia"><b>Día 2</b>Programación por confirmar</div>
-        <div class="dia"><b>Día 3</b>Programación por confirmar</div>
+        <div class="dia"><span>22 de octubre</span><b>Día 1 — Inauguración</b>Inauguración a las 9:00 h y conferencias magistrales.</div>
+        <div class="dia"><span>23 de octubre</span><b>Día 2 — Mesas y talleres</b>Mesas académicas y talleres; programación detallada próximamente.</div>
+        <div class="dia"><span>24 de octubre</span><b>Día 3 — Feria</b>Feria de Agroecología y Ecotecnias, Berriozábal, 9:00 h.</div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="page" id="evento-faq">
+  <div class="wrap" style="padding-top:56px;">
+    <div class="subtabs">
+      <a class="subtab" href="#evento-sedes" data-route>Sedes</a>
+      <a class="subtab" href="#evento-comite" data-route>Comité organizador</a>
+      <a class="subtab" href="#evento-programa" data-route>Programa y talleres</a>
+      <a class="subtab active" href="#evento-faq" data-route>Preguntas frecuentes</a>
+    </div>
+    <div class="section-head reveal">
+      <p class="eyebrow">Evento · Preguntas frecuentes</p>
+      <h2>Resolvemos tus dudas sobre UHE 2026</h2>
+    </div>
+
+    <details class="committee reveal" open>
+      <summary>¿El evento tiene costo?</summary>
+      <div class="committee-answer">
+        <p style="margin-bottom:0;">La inscripción y la participación en UHE 2026 son gratuitas: el registro y el acceso a las conferencias magistrales, ponencias y demás actividades académicas abiertas no tienen costo. El comité confirmará próximamente en esta página si existe alguna condición particular para constancias, publicación en memorias o participación en talleres.</p>
+      </div>
+    </details>
+
+    <details class="committee reveal">
+      <summary>¿Los trabajos deben tratar exclusivamente sobre cuencas o ecotecnologías?</summary>
+      <div class="committee-answer">
+        <p style="margin-bottom:0;">No. Las conferencias magistrales y la reflexión central de UHE 2026 se enfocan en cuencas y ecotecnologías, pero las mesas académicas reciben trabajos de las distintas líneas incluidas en la convocatoria.</p>
+      </div>
+    </details>
+
+    <details class="committee reveal">
+      <summary>¿Puedo participar sin presentar un trabajo?</summary>
+      <div class="committee-answer">
+        <p style="margin-bottom:0;">Sí. Las personas interesadas pueden registrarse como asistentes y participar en las actividades abiertas conforme al cupo y las condiciones de cada sede.</p>
+      </div>
+    </details>
+
+    <details class="committee reveal">
+      <summary>¿Las ponencias pueden presentarse en línea?</summary>
+      <div class="committee-answer">
+        <p style="margin-bottom:0;">Sí. La convocatoria contempla ponencias orales presenciales y virtuales. El programa indicará la modalidad y la plataforma asignada a cada trabajo.</p>
+      </div>
+    </details>
+
+    <details class="committee reveal">
+      <summary>¿El póster puede presentarse de manera virtual?</summary>
+      <div class="committee-answer">
+        <p style="margin-bottom:0;">La convocatoria señala que la persona autora debe estar presente para discutir y defender el póster. El comité confirmará si esta modalidad será exclusivamente presencial.</p>
+      </div>
+    </details>
+
+    <details class="committee reveal">
+      <summary>¿Dónde se publicarán los resultados?</summary>
+      <div class="committee-answer">
+        <p style="margin-bottom:0;">Los resultados y avisos se enviarán al correo registrado y se publicarán en esta página el 8 de octubre de 2026.</p>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -700,7 +895,7 @@
           <img src="data:image/png;base64,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" alt="Logotipo del Congreso UHE" style="width:34px;height:44px;" />
           <span>UHE 2026</span>
         </div>
-        <p style="max-width:320px; margin-top:14px;">Congreso Internacional y Congreso Nacional Universidad, Salud y Ambiente. Coordinado por la Dra. Daisy Escobar Castillejos, Facultad de Ingeniería, UNACH.</p>
+        <p style="max-width:320px; margin-top:14px;">IX Congreso Internacional y XI Congreso Nacional Universidad, Salud y Ambiente. Coordinado por la Dra. Daisy Escobar Castillejos, Facultad de Ingeniería, UNACH.</p>
         <div class="social-row">
           <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4 4 0 0 0-6.9 3.6C8.3 8.6 5.7 7.2 3.8 5c-.3.6-.5 1.3-.5 2a4 4 0 0 0 1.8 3.3c-.7 0-1.3-.2-1.9-.5 0 1.9 1.4 3.6 3.2 4-.6.1-1.2.2-1.8.1.5 1.6 2 2.7 3.8 2.8-1.5 1.2-3.4 1.8-5.4 1.6 1.9 1.2 4.1 1.9 6.5 1.9 7.8 0 12-6.5 12-12.1v-.6c.8-.6 1.5-1.3 2-2.1z"/></svg></a>
           <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.3l.4-2.7h-2.7V9.4c0-.8.2-1.3 1.4-1.3h1.4V5.7c-.7-.1-1.5-.2-2.3-.2-2.3 0-3.9 1.4-3.9 3.9v2h-2.3v2.7h2.3v7z"/></svg></a>
@@ -712,9 +907,11 @@
         <ul class="footer-contact">
           <li><a href="#congreso" data-route>El congreso</a></li>
           <li><a href="#autores-instrucciones" data-route>Autores</a></li>
+          <li><a href="#feria" data-route>Feria de Agroecología</a></li>
           <li><a href="#asistir" data-route>Asistir</a></li>
           <li><a href="#instituciones" data-route>Instituciones</a></li>
           <li><a href="#evento-comite" data-route>Comité organizador</a></li>
+          <li><a href="#evento-faq" data-route>Preguntas frecuentes</a></li>
         </ul>
       </div>
       <div>
@@ -736,8 +933,8 @@
 
 <script>
 (function(){
-  var PAGES = ['inicio','congreso','autores-instrucciones','autores-articulos','autores-posters','asistir','instituciones','evento-sedes','evento-comite','evento-programa'];
-  var GROUPS = { autores:['autores-instrucciones','autores-articulos','autores-posters'], evento:['evento-sedes','evento-comite','evento-programa'] };
+  var PAGES = ['inicio','congreso','autores-instrucciones','autores-articulos','autores-posters','feria','asistir','instituciones','evento-sedes','evento-comite','evento-programa','evento-faq'];
+  var GROUPS = { autores:['autores-instrucciones','autores-articulos','autores-posters'], evento:['evento-sedes','evento-comite','evento-programa','evento-faq'] };
 
   function closeAllDropdowns(){
     document.querySelectorAll('.nav-links li.has-sub.open').forEach(function(li){ li.classList.remove('open'); });
